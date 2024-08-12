@@ -1,0 +1,63 @@
+<?php
+
+namespace App\Models;
+
+use Core\BaseModel;
+
+class Accounting extends BaseModel
+{
+    protected $table = 'accounting';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'description',
+        'amount',
+        'type',
+        'currency',
+        'date'
+    ];
+    protected $hidden = [
+        'user_id',
+        'created_at',
+        'updated_at',
+    ];
+
+    public function getAllMyAccounting($userId, $queryParams)
+    {
+        $fields = $this->fillable;
+        $fields[] = $this->primaryKey;
+
+        $query = $this->db
+            ->table($this->table)
+            ->select($fields)
+            ->where(['user_id']);
+
+        $params = ['user_id' => $userId];
+
+        if (isset($queryParams['q']) && $queryParams['q'] !== '') {
+            $query->appendCustomSql("AND (description LIKE :q)");
+            $params['q'] = '%' . $queryParams['q'] . '%';
+        }
+
+        if (isset($queryParams['currency']) && $queryParams['currency'] !== '') {
+            $query->appendCustomSql("AND currency = :currency");
+            $params['currency'] = $queryParams['currency'];
+        }
+
+        if (isset($queryParams['type']) && $queryParams['type'] !== '') {
+            $query->appendCustomSql("AND type = :type");
+            $params['type'] = $queryParams['type'];
+        }
+
+        $query->order('date', 'desc');
+
+        $page = isset($queryParams['page']) ? (int) $queryParams['page'] : 1;
+        $pageSize = isset($queryParams['pageSize']) ? (int) $queryParams['pageSize'] : 3;
+        $offset = ($page - 1) * $pageSize;
+
+        $query->appendCustomSql("LIMIT $offset, $pageSize");
+
+        $result = $query->execute($params);
+
+        return $result ?: false;
+    }
+}

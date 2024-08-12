@@ -1,0 +1,53 @@
+services:
+  db:
+    image: mysql:8.0.29
+    container_name: accounting_mysql
+    command: --default-authentication-plugin=mysql_native_password --sql_mode=""
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+      - mysql_data:/var/lib/mysql
+    env_file:
+      - .env
+
+  php:
+    build: ./api
+    container_name: accounting_api
+    volumes:
+      - ./api/src:/var/www/html/api
+      - /var/www/html/api/vendor
+    ports:
+      - "80:80"
+    env_file:
+      - .env
+
+  app:
+    build:
+      context: ./app
+      target: dev
+    container_name: accounting_app
+    command: npm run dev
+    volumes:
+      - ./app/src:/app/src
+      - ./app/public:/app/public
+      - ./app/vite.config.ts:/app/vite.config.ts
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    env_file:
+      - .env
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+
+volumes:
+  mysql_data:
+    labels:
+      keep: true

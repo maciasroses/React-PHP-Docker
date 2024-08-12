@@ -1,0 +1,17 @@
+{
+  "name": "macias/api",
+  "type": "project",
+  "minimum-stability": "dev",
+  "description": "",
+  "autoload": {
+    "psr-4": {
+      "Core\\": "core",
+      "Auth\\": "app/Auth",
+      "App\\": "app/Site",
+      "Admin\\": "app/Admin"
+    },
+    "files": [
+      "core/Helpers.php"
+    ]
+  }
+}

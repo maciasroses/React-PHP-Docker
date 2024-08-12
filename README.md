@@ -1,1 +1,1 @@
-This is a fullstack example with React with Vite and PHP with MySQL database
+# This is a fullstack example with React with the Vite framework and PHP with MySQL database

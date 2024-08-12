@@ -1,3 +1,4 @@
+import { AuthProvider } from "./AuthProvider";
 import { ThemeProvider } from "./ThemeProvider";
 
-export { ThemeProvider };
+export { AuthProvider, ThemeProvider };

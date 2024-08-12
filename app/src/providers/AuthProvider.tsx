@@ -16,9 +16,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isFetching, setIsFetching] = useState(true);
 
   const fetchCurrentUser = async () => {
-    const response = await http.getMe();
-    if (response.status === 200) {
-      setUser(response.data);
+    try {
+      const response = await http.getMe();
+      if (response.status === 200) {
+        setUser(response.data);
+      }
+    } catch {
+      console.error("An error occurred. Please try again.");
     }
     setIsFetching(false);
   };

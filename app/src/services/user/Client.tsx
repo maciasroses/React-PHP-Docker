@@ -40,9 +40,8 @@ class Http {
       } else {
         return { success: false, message: data.messages.message, errors: {} };
       }
-    } catch (error) {
-      console.error(error);
-      throw new Error("An internal error occurred");
+    } catch {
+      console.error("An error occurred. Please try again.");
     }
   }
 
@@ -87,9 +86,8 @@ class Http {
       } else {
         return { success: false, message: data.messages.message, errors: {} };
       }
-    } catch (error) {
-      console.error(error);
-      throw new Error("An internal error occurred");
+    } catch {
+      console.error("An error occurred. Please try again.");
     }
   }
 
@@ -111,9 +109,8 @@ class Http {
       } else {
         return { success: false, message: data.messages.message };
       }
-    } catch (error) {
-      console.error(error);
-      throw new Error("An internal error occurred");
+    } catch {
+      console.error("An error occurred. Please try again.");
     }
   }
 
@@ -128,9 +125,8 @@ class Http {
       const data = await response.json();
 
       return data;
-    } catch (error) {
-      console.error(error);
-      throw new Error("An internal error occurred");
+    } catch {
+      console.error("An error occurred. Please try again.");
     }
   }
 }

@@ -1,16 +1,37 @@
+import { Navigate, Outlet } from "react-router-dom";
 import { HomePage, AccountingPage } from "../../pages/Auth";
-import { NotFoundPage } from "../../pages";
 
-const allRoutes = {
-  home: { name: "Home", path: "/home", element: <HomePage /> },
-  accounting: {
-    name: "Accounting",
-    path: "/accounting",
-    element: <AccountingPage />,
+export const AuthRoutes = [
+  {
+    path: "/auth",
+    element: <Outlet />,
+    children: [
+      {
+        index: true,
+        element: <Navigate to="home" />,
+      },
+      {
+        path: "home",
+        element: <HomePage />,
+      },
+      {
+        path: "accounting",
+        element: <Outlet />,
+        children: [
+          {
+            index: true,
+            element: <AccountingPage />,
+          },
+        ],
+      },
+      {
+        path: "*",
+        element: <div>Not found</div>,
+      },
+    ],
   },
-  notFound: { name: "Not Found", path: "404", element: <NotFoundPage /> },
-};
-
-export const routes = {
-  allRoutes,
-};
+  {
+    path: "*",
+    element: <Navigate to="/auth/home" />,
+  },
+];

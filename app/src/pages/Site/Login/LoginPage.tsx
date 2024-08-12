@@ -32,11 +32,15 @@ const LoginPage = () => {
     event.preventDefault();
     setIsPending(true);
     const formData = new FormData(event.currentTarget);
-    const response = await http.login(formData);
-    if (response.success) {
-      setUser(response.data);
-    } else {
-      setBadResponse(response);
+    try {
+      const response = await http.login(formData);
+      if (response.success) {
+        setUser(response.data);
+      } else {
+        setBadResponse(response);
+      }
+    } catch {
+      console.error("An error occurred. Please try again.");
     }
     setIsPending(false);
   };

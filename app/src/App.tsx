@@ -1,6 +1,5 @@
-import { AppRouter } from "./routes";
-import { ThemeProvider } from "./providers";
-import { AuthProvider } from "./providers/AuthProvider";
+import AppRouter from "./routes/AppRouter";
+import { AuthProvider, ThemeProvider } from "./providers";
 import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {

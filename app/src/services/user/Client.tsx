@@ -131,5 +131,5 @@ class Http {
   }
 }
 
-const http = new Http();
-export default http;
+const UserClient = new Http();
+export default UserClient;

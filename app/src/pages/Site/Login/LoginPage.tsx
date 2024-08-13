@@ -1,4 +1,4 @@
-import { http } from "../../../services";
+import { UserClient } from "../../../services";
 import { useAuth } from "../../../hooks/useAuth";
 // import { useCallback, useEffect, useState } from "react";
 import { useState } from "react";
@@ -15,7 +15,7 @@ const LoginPage = () => {
   );
 
   // const fetchCurrentUser = useCallback(async () => {
-  //   const response = await http.getMe();
+  //   const response = await UserClient.getMe();
   //   if (response.status === 200) {
   //     setUser(response.data);
   //   }
@@ -33,11 +33,11 @@ const LoginPage = () => {
     setIsPending(true);
     const formData = new FormData(event.currentTarget);
     try {
-      const response = await http.login(formData);
-      if (response.success) {
+      const response = await UserClient.login(formData);
+      if (response && response.success) {
         setUser(response.data);
       } else {
-        setBadResponse(response);
+        setBadResponse(response as ILoginState);
       }
     } catch {
       console.error("An error occurred. Please try again.");

@@ -23,4 +23,16 @@ class Accounting extends BaseController
 
         return $this->response(200, $accounting);
     }
+
+    public function getAccountingById($id)
+    {
+        $requestUser = $this->request->user();
+        $accounting = $this->model->getAccountingById($id, $requestUser['id']);
+
+        if (!$accounting) {
+            return $this->response(404, [], ['message' => 'Accounting not found']);
+        }
+
+        return $this->response(200, $accounting);
+    }
 }

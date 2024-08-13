@@ -1,9 +1,9 @@
-import { http } from "../../../services";
+import { UserClient } from "../../../services";
 import { useAuth } from "../../../hooks/useAuth";
 import { useCallback, useEffect, useState } from "react";
+import SubmitButton from "../../../components/Submitbutton";
 import { INITIAL_STATE_RESPONSE } from "../../../constants";
 import type { IRegisterState } from "../../../interfaces";
-import SubmitButton from "../../../components/Submitbutton";
 
 const SignupPage = () => {
   const { setUser } = useAuth();
@@ -13,7 +13,7 @@ const SignupPage = () => {
   );
 
   const fetchCurrentUser = useCallback(async () => {
-    const response = await http.getMe();
+    const response = await UserClient.getMe();
     if (response.status === 200) {
       setUser(response.data);
     }
@@ -29,11 +29,11 @@ const SignupPage = () => {
     event.preventDefault();
     setIsPending(true);
     const formData = new FormData(event.currentTarget);
-    const response = await http.register(formData);
-    if (response.success) {
+    const response = await UserClient.register(formData);
+    if (response && response.success) {
       setUser(response.data);
     } else {
-      setBadResponse(response);
+      setBadResponse(response as IRegisterState);
     }
     setIsPending(false);
   };

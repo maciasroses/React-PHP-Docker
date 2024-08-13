@@ -1,3 +1,4 @@
-import http from "./user/Client";
+import UserClient from "./user/Client";
+import AccountingClient from "./accounting/Client";
 
-export { http };
+export { UserClient, AccountingClient };

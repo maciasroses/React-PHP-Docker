@@ -54,10 +54,31 @@ class Accounting extends BaseModel
         $pageSize = isset($queryParams['pageSize']) ? (int) $queryParams['pageSize'] : 3;
         $offset = ($page - 1) * $pageSize;
 
-        $query->appendCustomSql("LIMIT $offset, $pageSize");
-
         $result = $query->execute($params);
 
-        return $result ?: false;
+        $total_pages = ceil(count($result) / $pageSize);
+
+        $query->appendCustomSql("LIMIT $offset, $pageSize");
+        $result = $query->execute($params);
+
+        return [
+            'accounting_data' => $result ?: [],
+            'total_pages' => $total_pages,
+        ];
+    }
+
+    public function getAccountingById($id, $userId)
+    {
+        $fields = $this->fillable;
+        $fields[] = $this->primaryKey;
+
+        $result = $this->db
+            ->table($this->table)
+            ->select($fields)
+            ->where(["id", "user_id"])
+            ->execute(['id' => $id, 'user_id' => $userId]);
+
+        if (!$result) return false;
+        return $result[0];
     }
 }

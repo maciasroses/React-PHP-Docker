@@ -15,6 +15,27 @@ export interface IUser {
   id: string;
 }
 
+export interface IAccounting {
+  description: string;
+  amount: number;
+  type: string;
+  currency: string;
+  date: string;
+  id: string;
+}
+
+export interface IAccountingList {
+  accounting_data: IAccounting[];
+  total_pages: number;
+}
+
+export interface ISearchParams {
+  q: string;
+  currency: string;
+  type: string;
+  page: string;
+}
+
 export interface IResponse {
   status: number;
   messages: {

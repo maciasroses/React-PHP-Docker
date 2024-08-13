@@ -1,4 +1,4 @@
-import { http } from "../../../../services";
+import { UserClient } from "../../../../services";
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../../../hooks/useAuth";
 
@@ -25,7 +25,7 @@ const ProfileMenu = () => {
   };
 
   const handleSubmit = async () => {
-    await http.logout();
+    await UserClient.logout();
   };
 
   useEffect(() => {

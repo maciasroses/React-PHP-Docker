@@ -40,7 +40,7 @@ export default function AppRouter() {
             ) : (
               <Sidebar />
             )}
-            <section className="sm:ml-48 mt-20 p-4 bg-gray-200 dark:bg-gray-900 h-[2000px]">
+            <section className="sm:ml-48 mt-20 p-4 bg-gray-200 dark:bg-gray-900">
               {routes}
             </section>
           </main>

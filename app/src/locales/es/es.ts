@@ -1,4 +1,4 @@
-import { index, sidebar } from "./index";
+import { index, sidebar, accounting } from "./index";
 
 export default {
   lang: "es",
@@ -6,4 +6,5 @@ export default {
   enLang: "Inglés",
   index: JSON.stringify(index),
   sidebar: JSON.stringify(sidebar),
+  accounting: JSON.stringify(accounting),
 };

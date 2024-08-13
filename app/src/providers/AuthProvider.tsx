@@ -1,4 +1,4 @@
-import { http } from "../services";
+import { UserClient } from "../services";
 import { createContext, ReactNode, useEffect, useState } from "react";
 import type { IUser } from "../interfaces";
 
@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const fetchCurrentUser = async () => {
     try {
-      const response = await http.getMe();
+      const response = await UserClient.getMe();
       if (response.status === 200) {
         setUser(response.data);
       }

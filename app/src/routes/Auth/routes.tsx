@@ -1,5 +1,12 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { HomePage, AccountingPage } from "../../pages/Auth";
+import {
+  HomePage,
+  AccountingLayout,
+  AccountingPage,
+  AddAccountingPage,
+  EditAccountingPage,
+  DetailAccountingPage,
+} from "../../pages/Auth";
 
 export const AuthRoutes = [
   {
@@ -16,11 +23,29 @@ export const AuthRoutes = [
       },
       {
         path: "accounting",
-        element: <Outlet />,
+        element: <AccountingLayout />,
         children: [
           {
             index: true,
             element: <AccountingPage />,
+          },
+          {
+            path: "add",
+            element: <AddAccountingPage />,
+          },
+          {
+            path: ":id",
+            element: <Outlet />,
+            children: [
+              {
+                index: true,
+                element: <DetailAccountingPage />,
+              },
+              {
+                path: "edit",
+                element: <EditAccountingPage />,
+              },
+            ],
           },
         ],
       },

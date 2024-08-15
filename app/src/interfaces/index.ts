@@ -24,6 +24,13 @@ export interface IAccounting {
   id: string;
 }
 
+export interface IAccountingsForBarChart {
+  amount: number;
+  id: string;
+  date: Date;
+  type: string;
+}
+
 export interface IAccountingList {
   accounting_data: IAccounting[];
   total_pages: number;
@@ -75,3 +82,5 @@ export interface IAccountingCreateNUpdateState extends ISharedState {
     date?: Date;
   };
 }
+
+export type IAccountingDeleteState = ISharedState;

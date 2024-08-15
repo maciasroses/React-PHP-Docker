@@ -24,6 +24,22 @@ class Accounting extends BaseController
         return $this->response(200, $accounting);
     }
 
+    public function getAllMyAccountingWithoutPaginationForBarChart()
+    {
+        $requestUser = $this->request->user();
+        $params = $this->request->parameters();
+        $currency = isset($params['currency']) ? strtoupper($params['currency']) : "USD";
+
+        if (!in_array($currency, ["USD", "EUR", "GBP", "MXN"])) {
+            // return $this->response(400, [], ['message' => 'Currency not supported']);
+            $currency = "USD";
+        }
+
+        $accounting = $this->model->getAllMyAccountingWithoutPaginationForBarChart($requestUser['id'], $currency);
+
+        return $this->response(200, $accounting);
+    }
+
     public function getAccountingById($id)
     {
         $requestUser = $this->request->user();
@@ -89,6 +105,28 @@ class Accounting extends BaseController
         try {
             $this->model->updateAccounting($data);
             return $this->response(200, [], ['message' => 'Accounting updated']);
+        } catch (Throwable $e) {
+            return $this->response(400, [], ['message' => $e->getMessage()]);
+        }
+    }
+
+    public function deleteAccounting($accountingId)
+    {
+        $requestUser = $this->request->user();
+
+        try {
+            $accounting = $this->model->getAccountingById($accountingId, $requestUser['id']);
+            if (!$accounting) {
+                return $this->response(404, [], ['message' => 'Accounting not found']);
+            }
+        } catch (Throwable $e) {
+            return $this->response(400, [], ['message' => $e->getMessage()]);
+        }
+
+        try {
+            $this->model->deleteAccounting($accountingId,  $requestUser['id']);
+            return $this->response(200, [], ['message' => 'Accounting deleted']);
+            // return $this->response(204);
         } catch (Throwable $e) {
             return $this->response(400, [], ['message' => $e->getMessage()]);
         }

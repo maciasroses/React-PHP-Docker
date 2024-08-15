@@ -2,6 +2,7 @@ import { validateAccounting } from "./schema";
 import type {
   IAccounting,
   IAccountingCreateNUpdateState,
+  IAccountingsForBarChart,
 } from "../../interfaces";
 
 class Http {
@@ -18,6 +19,19 @@ class Http {
         accounting_data: data.data.accounting_data as IAccounting[],
         total_pages: data.data.total_pages as number,
       };
+    } catch {
+      console.error("An error occurred. Please try again.");
+    }
+  }
+
+  async getAllForBarChart(currency: URLSearchParams) {
+    const url = `${this.#url}/accounting/bar-chart?${currency.toString()}`;
+
+    try {
+      const response = await fetch(url, { credentials: "include" });
+      const data = await response.json();
+
+      return data.data as IAccountingsForBarChart[];
     } catch {
       console.error("An error occurred. Please try again.");
     }
@@ -128,6 +142,32 @@ class Http {
         success: false,
         message: "An internal error occurred. Please try again later.",
         errors: {},
+      };
+    }
+  }
+
+  async delete(id: string) {
+    const url = `${this.#url}/accounting/${id}`;
+
+    try {
+      const response = await fetch(url, {
+        method: "DELETE",
+        credentials: "include",
+      });
+      const data = await response.json();
+
+      if (data.status === 200) {
+        return {
+          success: true,
+          message: data.messages.message,
+        };
+      } else {
+        return { success: false, message: data.messages.message };
+      }
+    } catch {
+      return {
+        success: false,
+        message: "An internal error occurred. Please try again later.",
       };
     }
   }

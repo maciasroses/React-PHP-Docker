@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { AccountingClient } from "../../../../services";
 import { IAccounting } from "../../../../interfaces";
 import { useClientFetch } from "../../../../hooks";
+import { DeleteButton } from "../components";
 // import { useTranslation } from "react-i18next";
 
 const DetailAccountingPage = () => {
@@ -81,11 +82,7 @@ const DetailAccountingPage = () => {
               />
             </svg>
           </a>
-          {/* <DeleteButton
-              accounting={accounting as AccountingProps}
-              lng={lng}
-              userId={userSession.userId}
-            /> */}
+          <DeleteButton accounting={accounting as IAccounting} />
         </div>
         <a
           href="/auth/accounting"

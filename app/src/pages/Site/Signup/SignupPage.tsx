@@ -4,6 +4,7 @@ import { useState } from "react";
 import SubmitButton from "../../../components/Submitbutton";
 import { INITIAL_STATE_RESPONSE } from "../../../constants";
 import type { IRegisterState } from "../../../interfaces";
+import { Link } from "react-router-dom";
 
 const SignupPage = () => {
   const { setUser } = useAuth();
@@ -28,11 +29,11 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center dark:text-white">
+    <div className="w-full h-screen flex justify-center items-center dark:text-white">
       <div className="flex flex-col items-center gap-4">
-        <a className="text-4xl" href="/">
+        <Link to="/" className="text-4xl">
           LOGO
-        </a>
+        </Link>
         <div className="flex flex-col items-center gap-2">
           <h1 className=" text-6xl">Sign up</h1>
           {badResponse.message && (
@@ -122,7 +123,7 @@ const SignupPage = () => {
                   </div>
                 </div>
               </div>
-              <div className="text-center">
+              <div className="text-center mt-4">
                 <SubmitButton title="Sign up" pending={isPending} />
               </div>
             </fieldset>
@@ -131,9 +132,9 @@ const SignupPage = () => {
         <p>
           Already registered?{" "}
           <span>
-            <a className="text-blue-500" href="login">
+            <Link to="/login" className="text-blue-500">
               Log in
-            </a>
+            </Link>
           </span>
         </p>
       </div>

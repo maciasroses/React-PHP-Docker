@@ -10,6 +10,7 @@ import {
 } from "chart.js";
 import { getMonthName } from "../../../../../utils/getMonthName";
 import type { IAccountingsForBarChart } from "../../../../../interfaces";
+import { useCustomTranslation } from "../../../../../hooks";
 
 ChartJS.register(
   CategoryScale,
@@ -44,6 +45,7 @@ const BarChart = ({
 }: {
   accountings: IAccountingsForBarChart[];
 }) => {
+  const { barchart } = useCustomTranslation("home");
   const incomeData = getMonthlyData(accountings, "Income");
   const expenseData = getMonthlyData(accountings, "Expense");
   const transferData = getMonthlyData(accountings, "Transfer");
@@ -57,7 +59,9 @@ const BarChart = ({
     ]),
   ].sort((a, b) => Number(a) - Number(b)); // Sort months
 
-  const labels = uniqueMonths.map((month) => getMonthName(Number(month)));
+  const labels = uniqueMonths.map((month) =>
+    getMonthName(Number(month), barchart.lng)
+  );
 
   // Map data to match the unique months order
   const mapDataToMonths = (data: { [key: number]: number }) =>
@@ -67,21 +71,21 @@ const BarChart = ({
     labels,
     datasets: [
       {
-        label: "Ingresos",
+        label: barchart.income,
         data: mapDataToMonths(incomeData),
         backgroundColor: "rgba(75, 192, 192, 0.6)",
         borderColor: "rgba(75, 192, 192, 1)",
         borderWidth: 1,
       },
       {
-        label: "Gastos",
+        label: barchart.expense,
         data: mapDataToMonths(expenseData),
         backgroundColor: "rgba(255, 99, 132, 0.6)",
         borderColor: "rgba(255, 99, 132, 1)",
         borderWidth: 1,
       },
       {
-        label: "Transferencias",
+        label: barchart.transfer,
         data: mapDataToMonths(transferData),
         backgroundColor: "rgba(54, 162, 235, 0.6)",
         borderColor: "rgba(54, 162, 235, 1)",
@@ -98,7 +102,7 @@ const BarChart = ({
       },
       title: {
         display: true,
-        text: "Ingresos y Gastos por Mes",
+        text: barchart.title,
       },
     },
   };

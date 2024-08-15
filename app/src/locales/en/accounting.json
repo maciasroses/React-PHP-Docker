@@ -26,5 +26,35 @@
         }
       }
     }
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "deleteButton": {
+    "alert": "Are you sure you want to delete the accounting",
+    "confirm": "Yes, delete"
+  },
+  "accountingForm": {
+    "createTitle": "Create accounting",
+    "editTitle": "Edit accounting",
+    "amount": "Amount",
+    "currency": "Currency",
+    "selectCurrency": "Select a currency",
+    "date": "Date",
+    "type": {
+      "title": "Types",
+      "select": "Select a type",
+      "options": {
+        "income": "Income",
+        "expense": "Expense",
+        "transfer": "Transfer"
+      }
+    },
+    "description": "Description",
+    "descriptionPlaceholder": "This is description example",
+    "cancelButton": "Cancel",
+    "createButton": "Create",
+    "updateButton": "Update"
   }
 }

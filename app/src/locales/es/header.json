@@ -1,0 +1,14 @@
+{
+  "themeSelector": {
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema"
+  },
+  "profileMenu": {
+    "home": "Inicio",
+    "accounting": "Contabilidad",
+    "profile": "Perfil",
+    "settings": "Configuración",
+    "logout": "Cerrar sesión"
+  }
+}

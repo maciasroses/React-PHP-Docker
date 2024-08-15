@@ -26,5 +26,35 @@
         }
       }
     }
+  },
+  "pagination": {
+    "previous": "Anterior",
+    "next": "Siguiente"
+  },
+  "deleteButton": {
+    "alert": "¿Estás seguro de que quieres eliminar la contabilidad",
+    "confirm": "Sí, eliminar"
+  },
+  "accountingForm": {
+    "createTitle": "Crear contabilidad",
+    "editTitle": "Editar contabilidad",
+    "amount": "Cantidad",
+    "currency": "Moneda",
+    "selectCurrency": "Selecciona una moneda",
+    "date": "Fecha",
+    "type": {
+      "title": "Tipos",
+      "select": "Selecciona un tipo",
+      "options": {
+        "income": "Ingreso",
+        "expense": "Gasto",
+        "transfer": "Transferencia"
+      }
+    },
+    "description": "Descripción",
+    "descriptionPlaceholder": "Este es un ejemplo de descripción",
+    "cancelButton": "Cancelar",
+    "createButton": "Crear",
+    "updateButton": "Actualizar"
   }
 }

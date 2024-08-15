@@ -1,14 +1,17 @@
 import { useCallback } from "react";
-import { useParams } from "react-router-dom";
-import { AccountingClient } from "../../../../services";
-import { IAccounting } from "../../../../interfaces";
-import { useClientFetch } from "../../../../hooks";
 import { DeleteButton } from "../components";
-// import { useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { useClientFetch } from "../../../../hooks";
+import { Link, useParams } from "react-router-dom";
+import { PencilIcon } from "../../../../assets/icons";
+import { AccountingClient } from "../../../../services";
+import formatDateAmerican from "../../../../utils/formatDateAmerican";
+import formatDateLatinAmerican from "../../../../utils/formatDateLatinAmerican";
+import type { IAccounting } from "../../../../interfaces";
 
 const DetailAccountingPage = () => {
-  // const { t } = useTranslation();
-  // const lng = t("lang");
+  const { t } = useTranslation();
+  const lng = t("lang");
   const { id } = useParams();
   if (!id) throw new Error("No id provided");
 
@@ -55,41 +58,27 @@ const DetailAccountingPage = () => {
           mt-2 text-xs font-medium inline-flex items-center px-2.5 py-0.5 text-gray-800 dark:text-gray-400
         "
         >
-          {/* {lng === "en"
-            ? formatDateAmerican(accounting.date)
-            : formatDateLatinAmerican(accounting.date)} */}
-          {accounting?.date.toString()}
+          {lng === "en"
+            ? formatDateAmerican(accounting?.date as Date)
+            : formatDateLatinAmerican(accounting?.date as Date)}
         </p>
       </div>
       <div className="flex flex-col justify-center items-center gap-2 mt-4">
         <div className="flex justify-center items-center gap-2">
-          <a
+          <Link
+            to="edit"
             className="rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-blue-300 text-blue-700"
-            href={`/auth/accounting/${id}/edit`}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"
-              />
-            </svg>
-          </a>
+            <PencilIcon />
+          </Link>
           <DeleteButton accounting={accounting as IAccounting} />
         </div>
-        <a
-          href="/auth/accounting"
+        <Link
+          to="/auth/accounting"
           className="px-4 py-2 bg-gray-300 text-gray-500 dark:bg-gray-600 dark:text-gray-400 rounded-md w-auto"
         >
-          Go back
-        </a>
+          {lng === "en" ? "Back" : "Atrás"}
+        </Link>
       </div>
     </div>
   );

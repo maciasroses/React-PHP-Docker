@@ -1,0 +1,10 @@
+{
+  "title": "Inicio",
+  "barchart": {
+    "lng": "es",
+    "title": "Todas tus transacciones",
+    "income": "Ingresos",
+    "expense": "Gastos",
+    "transfer": "Transferencias"
+  }
+}

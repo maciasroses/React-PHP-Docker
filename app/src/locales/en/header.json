@@ -1,0 +1,14 @@
+{
+  "themeSelector": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "profileMenu": {
+    "home": "Home",
+    "accounting": "Accounting",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Log out"
+  }
+}

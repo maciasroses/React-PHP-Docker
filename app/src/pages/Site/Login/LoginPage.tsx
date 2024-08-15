@@ -4,6 +4,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import { INITIAL_STATE_RESPONSE } from "../../../constants";
 import SubmitButton from "../../../components/Submitbutton";
 import type { ILoginState } from "../../../interfaces";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   const { setUser } = useAuth();
@@ -28,11 +29,11 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center dark:text-white">
+    <div className="w-full h-screen flex justify-center items-center dark:text-white">
       <div className="flex flex-col items-center gap-4">
-        <a className="text-4xl" href="/">
+        <Link to="/" className="text-4xl">
           LOGO
-        </a>
+        </Link>
         <div className="flex flex-col items-center gap-2">
           <h1 className=" text-6xl">Login</h1>
           {badResponse.message && (
@@ -80,7 +81,7 @@ const LoginPage = () => {
                   )}
                 </div>
               </div>
-              <div className="text-center">
+              <div className="text-center mt-4">
                 <SubmitButton title="Login" pending={isPending} />
               </div>
             </fieldset>
@@ -89,9 +90,9 @@ const LoginPage = () => {
         <p>
           Not registered yet?{" "}
           <span>
-            <a className="text-blue-500" href="signup">
+            <Link to="/signup" className="text-blue-500">
               Sign up
-            </a>
+            </Link>
           </span>
         </p>
       </div>

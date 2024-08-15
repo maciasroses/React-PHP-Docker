@@ -1,0 +1,10 @@
+{
+  "title": "Home",
+  "barchart": {
+    "lng": "en",
+    "title": "All your transactions",
+    "income": "Income",
+    "expense": "Expenses",
+    "transfer": "Transfers"
+  }
+}

@@ -1,5 +1,5 @@
-export const getMonthName = (monthIndex: number) => {
-  const months = [
+export const getMonthName = (monthIndex: number, lng: string) => {
+  const esMonths = [
     "Enero",
     "Febrero",
     "Marzo",
@@ -13,5 +13,21 @@ export const getMonthName = (monthIndex: number) => {
     "Noviembre",
     "Diciembre",
   ];
-  return months[monthIndex];
+
+  const enMonths = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  return lng === "en" ? enMonths[monthIndex] : esMonths[monthIndex];
 };

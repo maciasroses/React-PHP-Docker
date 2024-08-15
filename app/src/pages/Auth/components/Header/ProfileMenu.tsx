@@ -1,8 +1,29 @@
+import { Link } from "react-router-dom";
 import { UserClient } from "../../../../services";
-import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../../../hooks/useAuth";
+import { useEffect, useRef, useState } from "react";
+import { useCustomTranslation } from "../../../../hooks";
+
+interface IProfileLink {
+  to: string;
+  onClick: () => void;
+  text: string;
+}
+
+const ProfileLink = ({ to, onClick, text }: IProfileLink) => {
+  return (
+    <Link
+      to={to}
+      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+      onClick={onClick}
+    >
+      {text}
+    </Link>
+  );
+};
 
 const ProfileMenu = () => {
+  const { profileMenu } = useCustomTranslation("header");
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const { user } = useAuth();
@@ -70,47 +91,35 @@ const ProfileMenu = () => {
 
             <div className="sm:hidden pb-1">
               <div className="border-t border-gray-300 dark:border-gray-800"></div>
-              <a
-                href="home"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                role="menuitem"
+              <ProfileLink
+                to="/auth/home"
                 onClick={closeMenu}
-              >
-                Home
-              </a>
-              <a
-                href="accounting"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                role="menuitem"
+                text={profileMenu.home}
+              />
+              <ProfileLink
+                to="/auth/accounting"
                 onClick={closeMenu}
-              >
-                Accounting
-              </a>
+                text={profileMenu.accounting}
+              />
             </div>
 
             <div className="border-t border-gray-300 dark:border-gray-800"></div>
-            <a
-              href="profile"
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-              role="menuitem"
+            <ProfileLink
+              to="/auth/profile"
               onClick={closeMenu}
-            >
-              Profile
-            </a>
-            <a
-              href="settings"
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-              role="menuitem"
+              text={profileMenu.profile}
+            />
+            <ProfileLink
+              to="/auth/settings"
               onClick={closeMenu}
-            >
-              Settings
-            </a>
+              text={profileMenu.settings}
+            />
             <form onSubmit={handleSubmit}>
               <button
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white w-full text-left"
                 type="submit"
               >
-                Log out
+                {profileMenu.logout}
               </button>
             </form>
           </div>

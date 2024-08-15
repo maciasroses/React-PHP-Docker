@@ -41,7 +41,11 @@ class Http {
         return { success: false, message: data.messages.message, errors: {} };
       }
     } catch {
-      console.error("An error occurred. Please try again.");
+      return {
+        success: false,
+        message: "An internal error occurred. Please try again later.",
+        errors: {},
+      };
     }
   }
 
@@ -84,10 +88,18 @@ class Http {
           errors: {},
         };
       } else {
-        return { success: false, message: data.messages.message, errors: {} };
+        return {
+          success: false,
+          message: data.messages.message,
+          errors: {},
+        };
       }
     } catch {
-      console.error("An error occurred. Please try again.");
+      return {
+        success: false,
+        message: "An internal error occurred. Please try again later.",
+        errors: {},
+      };
     }
   }
 
@@ -105,12 +117,13 @@ class Http {
         return {
           success: true,
           message: data.messages.message,
+          errors: {},
         };
       } else {
-        return { success: false, message: data.messages.message };
+        return { success: false, message: data.messages.message, errors: {} };
       }
     } catch {
-      console.error("An error occurred. Please try again.");
+      console.error("An internal error occurred. Please try again later.");
     }
   }
 

@@ -82,7 +82,6 @@ const LangSelector = () => {
 
   const handleChangeLang = (event: React.MouseEvent<HTMLButtonElement>) => {
     const target = event.currentTarget as HTMLButtonElement;
-    console.log("target", target.value);
     i18n.changeLanguage(target.value);
     closeMenu();
   };

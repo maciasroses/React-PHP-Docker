@@ -57,7 +57,7 @@ const DetailAccountingPage = () => {
           {/* {lng === "en"
             ? formatDateAmerican(accounting.date)
             : formatDateLatinAmerican(accounting.date)} */}
-          {accounting?.date}
+          {accounting?.date.toString()}
         </p>
       </div>
       <div className="flex flex-col justify-center items-center gap-2 mt-4">

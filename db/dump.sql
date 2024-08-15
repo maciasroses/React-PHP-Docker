@@ -27,7 +27,7 @@ CREATE TABLE accounting (
     description TEXT NOT NULL,
     amount DECIMAL(10, 2) NOT NULL,
     currency ENUM('USD', 'MXN', 'EUR', 'GBP') NOT NULL,
-    type ENUM('income', 'expense', 'transfer') NOT NULL,
+    type ENUM('Income', 'Expense', 'Transfer') NOT NULL,
     user_id CHAR(36) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

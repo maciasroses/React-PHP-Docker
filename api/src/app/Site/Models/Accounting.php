@@ -81,4 +81,25 @@ class Accounting extends BaseModel
         if (!$result) return false;
         return $result[0];
     }
+
+    public function createAccounting($data)
+    {
+        $result = $this->db
+            ->table($this->table)
+            ->insert(array_keys($data))
+            ->execute($data);
+
+        return $result;
+    }
+
+    public function updateAccounting($data)
+    {
+        $result = $this->db
+            ->table($this->table)
+            ->update(array_keys($data))
+            ->where(['id', 'user_id'])
+            ->execute($data);
+
+        return $result;
+    }
 }

@@ -1,46 +1,28 @@
+import { useState } from "react";
 import { UserClient } from "../../../services";
 import { useAuth } from "../../../hooks/useAuth";
-// import { useCallback, useEffect, useState } from "react";
-import { useState } from "react";
 import { INITIAL_STATE_RESPONSE } from "../../../constants";
-import type { ILoginState } from "../../../interfaces";
 import SubmitButton from "../../../components/Submitbutton";
+import type { ILoginState } from "../../../interfaces";
 
 const LoginPage = () => {
-  // const { setUser, setIsLoading } = useAuth();
   const { setUser } = useAuth();
   const [isPending, setIsPending] = useState(false);
   const [badResponse, setBadResponse] = useState<ILoginState>(
     INITIAL_STATE_RESPONSE
   );
 
-  // const fetchCurrentUser = useCallback(async () => {
-  //   const response = await UserClient.getMe();
-  //   if (response.status === 200) {
-  //     setUser(response.data);
-  //   }
-  // }, [setUser]);
-
-  // useEffect(() => {
-  //   fetchCurrentUser();
-  //   setIsLoading(false);
-  // });
-
   const submitAction: React.FormEventHandler<HTMLFormElement> = async (
     event
   ) => {
-    event.preventDefault();
     setIsPending(true);
+    event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    try {
-      const response = await UserClient.login(formData);
-      if (response && response.success) {
-        setUser(response.data);
-      } else {
-        setBadResponse(response as ILoginState);
-      }
-    } catch {
-      console.error("An error occurred. Please try again.");
+    const response = await UserClient.login(formData);
+    if (response && response.success) {
+      setUser(response.data);
+    } else {
+      setBadResponse(response as ILoginState);
     }
     setIsPending(false);
   };

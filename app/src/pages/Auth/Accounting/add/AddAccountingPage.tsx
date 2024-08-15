@@ -1,5 +1,7 @@
+import { AccountingForm } from "../components";
+
 const AddAccountingPage = () => {
-  return <div>AddAccountingPage</div>;
+  return <AccountingForm />;
 };
 
 export default AddAccountingPage;

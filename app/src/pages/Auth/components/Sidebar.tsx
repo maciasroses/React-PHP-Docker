@@ -2,6 +2,7 @@ import { useCustomTranslation } from "../../../hooks";
 
 const Sidebar = () => {
   const sidebar = useCustomTranslation("sidebar");
+  const pathname = window.location.pathname;
 
   return (
     <aside className="fixed z-30 top-0 w-48 h-screen transition-transform -translate-x-full sm:translate-x-0">
@@ -10,7 +11,10 @@ const Sidebar = () => {
           <li>
             <a
               href="/auth/home"
-              className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              // className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white group ${
+                pathname === "/auth/home" ? "bg-gray-200 dark:bg-gray-700" : ""
+              }`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +22,12 @@ const Sidebar = () => {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                // className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                className={`w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white ${
+                  pathname === "/auth/home"
+                    ? "text-gray-900 dark:text-white"
+                    : ""
+                }`}
               >
                 <path
                   strokeLinecap="round"
@@ -32,7 +41,12 @@ const Sidebar = () => {
           <li>
             <a
               href="/auth/accounting"
-              className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              // className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white group ${
+                pathname.startsWith("/auth/accounting")
+                  ? "bg-gray-200 dark:bg-gray-700"
+                  : ""
+              }`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +54,12 @@ const Sidebar = () => {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                // className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                className={`w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white ${
+                  pathname.startsWith("/auth/accounting")
+                    ? "text-gray-900 dark:text-white"
+                    : ""
+                }`}
               >
                 <path
                   strokeLinecap="round"

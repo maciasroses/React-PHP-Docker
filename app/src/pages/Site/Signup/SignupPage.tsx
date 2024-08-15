@@ -1,6 +1,6 @@
 import { UserClient } from "../../../services";
 import { useAuth } from "../../../hooks/useAuth";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import SubmitButton from "../../../components/Submitbutton";
 import { INITIAL_STATE_RESPONSE } from "../../../constants";
 import type { IRegisterState } from "../../../interfaces";
@@ -12,22 +12,11 @@ const SignupPage = () => {
     INITIAL_STATE_RESPONSE
   );
 
-  const fetchCurrentUser = useCallback(async () => {
-    const response = await UserClient.getMe();
-    if (response.status === 200) {
-      setUser(response.data);
-    }
-  }, [setUser]);
-
-  useEffect(() => {
-    fetchCurrentUser();
-  });
-
   const submitAction: React.FormEventHandler<HTMLFormElement> = async (
     event
   ) => {
-    event.preventDefault();
     setIsPending(true);
+    event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const response = await UserClient.register(formData);
     if (response && response.success) {

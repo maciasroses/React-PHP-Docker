@@ -20,7 +20,7 @@ export interface IAccounting {
   amount: number;
   type: string;
   currency: string;
-  date: string;
+  date: Date;
   id: string;
 }
 
@@ -63,5 +63,15 @@ export interface IRegisterState extends ISharedState {
     email?: string;
     password?: string;
     confirmPassword?: string;
+  };
+}
+
+export interface IAccountingCreateNUpdateState extends ISharedState {
+  errors: {
+    description?: string;
+    amount?: string;
+    currency?: string;
+    type?: string;
+    date?: Date;
   };
 }

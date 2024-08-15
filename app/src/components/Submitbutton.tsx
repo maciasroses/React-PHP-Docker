@@ -13,7 +13,7 @@ const SubmitButton = ({ title, pending, color = "blue" }: ISubmitbutton) => {
       disabled={pending}
       className={`${
         pending ? `bg-${color}-500/50` : `bg-${color}-500`
-      } mt-4 px-4 py-2  text-white rounded-md w-auto`}
+      } px-4 py-2  text-white rounded-md w-auto`}
     >
       {pending ? <Loading color={color} /> : title}
     </button>

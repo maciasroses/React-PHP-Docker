@@ -46,7 +46,13 @@ class Accounting extends BaseController
         $accounting = $this->model->getAccountingById($id, $requestUser['id']);
 
         if (!$accounting) {
-            return $this->response(404, [], ['message' => 'Accounting not found']);
+            // return $this->response(404, [], ['message' => 'Accounting not found']);
+            return $this->response(404, [], [
+                'error' => 'Accounting not found',
+                'description' => 'The accounting with the id ' . $id . ' was not found',
+                'es_error' => 'Contabilidad no encontrada',
+                'es_description' => 'La contabilidad con el id ' . $id . ' no fue encontrada'
+            ]);
         }
 
         return $this->response(200, $accounting);

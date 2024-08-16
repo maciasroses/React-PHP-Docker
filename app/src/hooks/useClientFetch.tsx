@@ -1,28 +1,41 @@
 // OPTION WITHOUT TRANSFORM:
 
+import { IResponse } from "../interfaces";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function useClientFetch<T>(fetchClient: () => Promise<T>) {
+  const { t } = useTranslation();
+  const lng = t("lang");
+
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const result = await fetchClient();
-        setData(result);
-      } catch {
-        console.error("Error fetching data");
+        const result = (await fetchClient()) as IResponse;
+        if (result.status !== 200)
+          throw new Error(JSON.stringify(result.messages));
+        setData(result.data as T);
+      } catch (error) {
+        const errorData = JSON.parse((error as Error).message);
+        setError({
+          name: lng === "en" ? errorData.error : errorData.es_error,
+          message:
+            lng === "en" ? errorData.description : errorData.es_description,
+        });
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [fetchClient]);
+  }, [fetchClient, lng]);
 
-  return { data, loading };
+  return { data, loading, error };
 }
 
 // OPTION WITH TRANSFORM:

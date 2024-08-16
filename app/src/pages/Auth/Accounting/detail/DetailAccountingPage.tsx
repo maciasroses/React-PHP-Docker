@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { DeleteButton } from "../components";
 import { useTranslation } from "react-i18next";
+import { Loading } from "../../../../components";
 import { useClientFetch } from "../../../../hooks";
 import { Link, useParams } from "react-router-dom";
 import { PencilIcon } from "../../../../assets/icons";
@@ -19,13 +20,23 @@ const DetailAccountingPage = () => {
     return AccountingClient.getById(id) as Promise<IAccounting>;
   }, [id]);
 
-  const { data: accounting, loading } =
-    useClientFetch<IAccounting>(fetchAccountings);
+  const {
+    data: accounting,
+    loading,
+    error,
+  } = useClientFetch<IAccounting>(fetchAccountings);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div className="w-full flex flex-col justify-center items-center gap-2">
+        <Loading size={"size-[5rem]"} />
+        <h1 className="text-4xl">{lng === "en" ? "Loading" : "Cargando"}...</h1>
+      </div>
+    );
+  if (error) throw error;
 
   return (
-    <div className="pt-10">
+    <>
       <div className="flex flex-col justify-center items-center">
         <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {accounting?.description}
@@ -80,7 +91,7 @@ const DetailAccountingPage = () => {
           {lng === "en" ? "Back" : "Atrás"}
         </Link>
       </div>
-    </div>
+    </>
   );
 };
 

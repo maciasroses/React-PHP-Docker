@@ -1,7 +1,7 @@
 import AccountingCard from "./AccountingCard";
-import type { IAccounting } from "../../../../../interfaces";
-import { Card404 } from "../../../../../components";
 import { useTranslation } from "react-i18next";
+import { Card404 } from "../../../../../components";
+import type { IAccounting } from "../../../../../interfaces";
 
 interface AccountingListPageProps {
   accountings: IAccounting[];
@@ -23,11 +23,13 @@ const AccountingList = ({ accountings }: AccountingListPageProps) => {
         <Card404
           title={
             lng === "en"
-              ? "Accountings were not found with this search"
-              : "No se encontraron contabilidades con esta búsqueda"
+              ? "Accountings were not found for show"
+              : "No se encontraron contabilidades para mostrar"
           }
           description={
-            lng === "en" ? "Try another search" : "Intenta otra búsqueda"
+            lng === "en"
+              ? "Try with another search or add a new one"
+              : "Intenta con otra búsqueda o agrega una nueva"
           }
         />
       )}

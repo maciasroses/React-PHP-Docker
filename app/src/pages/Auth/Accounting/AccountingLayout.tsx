@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Link, Outlet } from "react-router-dom";
 import { useCustomTranslation } from "../../../hooks";
+import { ErrorBoundary } from "../../../components";
 
 const AccountingLayout = () => {
   const { t } = useTranslation();
@@ -24,7 +25,9 @@ const AccountingLayout = () => {
       <p className="text-2xl md:text-xl text-center dark:text-white">
         {description}
       </p>
-      <Outlet />
+      <ErrorBoundary>
+        <Outlet />
+      </ErrorBoundary>
     </>
   );
 };

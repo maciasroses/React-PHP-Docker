@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { AccountingIcon, HomeIcon } from "../../../../assets/icons";
+import { AccountingIcon, HomeIcon, UserIcon } from "../../../../assets/icons";
 
 interface INavLinkComp {
   to: string;
@@ -20,6 +20,8 @@ const NavLinkComp = ({ to, span, icon }: INavLinkComp) => {
     >
       {icon === "home" ? (
         <HomeIcon isActive={isActive} />
+      ) : icon === "user" ? (
+        <UserIcon isActive={isActive} />
       ) : (
         <AccountingIcon isActive={isActive} />
       )}
@@ -29,8 +31,3 @@ const NavLinkComp = ({ to, span, icon }: INavLinkComp) => {
 };
 
 export default NavLinkComp;
-
-// to="/auth/home"
-// className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white group ${
-//   pathname === "/auth/home" ? "bg-gray-200 dark:bg-gray-700" : ""
-// }`}

@@ -2,8 +2,8 @@ import { useState } from "react";
 import { TrashIcon } from "../../../../assets/icons";
 import { AccountingClient } from "../../../../services";
 import { Modal, SubmitButton } from "../../../../components";
-import { useCustomTranslation, useModal } from "../../../../hooks";
 import { INITIAL_STATE_RESPONSE } from "../../../../constants";
+import { useCustomTranslation, useModal } from "../../../../hooks";
 import type {
   IAccounting,
   IAccountingDeleteState,

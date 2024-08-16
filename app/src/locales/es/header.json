@@ -6,6 +6,7 @@
   },
   "profileMenu": {
     "home": "Inicio",
+    "user": "Usuarios",
     "accounting": "Contabilidad",
     "profile": "Perfil",
     "settings": "Configuración",

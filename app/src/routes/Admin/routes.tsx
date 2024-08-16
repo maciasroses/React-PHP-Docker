@@ -12,13 +12,15 @@ export const AdminRoutes = [
       },
       {
         path: "dashboard",
-        element: <Outlet />,
-        children: [
-          {
-            index: true,
-            element: <HomePage />,
-          },
-        ],
+        element: <HomePage />,
+      },
+      {
+        path: "user",
+        element: <div>Users</div>,
+      },
+      {
+        path: "accounting",
+        element: <div>Accountings</div>,
       },
       {
         path: "*",

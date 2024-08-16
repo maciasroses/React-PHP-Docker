@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import Loading from "./Loading";
 
 interface ISubmitbutton {
@@ -11,9 +12,10 @@ const SubmitButton = ({ title, pending, color = "blue" }: ISubmitbutton) => {
     <button
       type="submit"
       disabled={pending}
-      className={`${
+      className={clsx(
+        "px-4 py-2 text-white rounded-md w-auto",
         pending ? `bg-${color}-500/50` : `bg-${color}-500`
-      } px-4 py-2  text-white rounded-md w-auto`}
+      )}
     >
       {pending ? <Loading color={color} /> : title}
     </button>

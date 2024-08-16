@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
+import { IUser } from "../../../../interfaces";
 import { UserClient } from "../../../../services";
-import { useAuth } from "../../../../hooks/useAuth";
 import { useEffect, useRef, useState } from "react";
 import { useCustomTranslation } from "../../../../hooks";
 
@@ -22,11 +22,10 @@ const ProfileLink = ({ to, onClick, text }: IProfileLink) => {
   );
 };
 
-const ProfileMenu = () => {
+const ProfileMenu = ({ user }: { user: IUser }) => {
   const { profileMenu } = useCustomTranslation("header");
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
-  const { user } = useAuth();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -92,12 +91,23 @@ const ProfileMenu = () => {
             <div className="sm:hidden pb-1">
               <div className="border-t border-gray-300 dark:border-gray-800"></div>
               <ProfileLink
-                to="/auth/home"
+                to={user.role === "admin" ? "/admin/dashboard" : "/auth/home"}
                 onClick={closeMenu}
                 text={profileMenu.home}
               />
+              {user.role === "admin" && (
+                <ProfileLink
+                  to="/admin/user"
+                  onClick={closeMenu}
+                  text={profileMenu.user}
+                />
+              )}
               <ProfileLink
-                to="/auth/accounting"
+                to={
+                  user.role === "admin"
+                    ? "/admin/accounting"
+                    : "/auth/accounting"
+                }
                 onClick={closeMenu}
                 text={profileMenu.accounting}
               />

@@ -6,6 +6,7 @@
   },
   "profileMenu": {
     "home": "Home",
+    "user": "Users",
     "accounting": "Accounting",
     "profile": "Profile",
     "settings": "Settings",

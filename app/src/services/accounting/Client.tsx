@@ -1,9 +1,5 @@
 import { validateAccounting } from "./schema";
-import type {
-  IAccounting,
-  IAccountingCreateNUpdateState,
-  IAccountingsForBarChart,
-} from "../../interfaces";
+import type { IAccountingCreateNUpdateState } from "../../interfaces";
 
 class Http {
   #url = "http://localhost/api";
@@ -14,11 +10,7 @@ class Http {
     try {
       const response = await fetch(url, { credentials: "include" });
       const data = await response.json();
-
-      return {
-        accounting_data: data.data.accounting_data as IAccounting[],
-        total_pages: data.data.total_pages as number,
-      };
+      return data;
     } catch {
       console.error("An error occurred. Please try again.");
     }
@@ -30,8 +22,7 @@ class Http {
     try {
       const response = await fetch(url, { credentials: "include" });
       const data = await response.json();
-
-      return data.data as IAccountingsForBarChart[];
+      return data;
     } catch {
       console.error("An error occurred. Please try again.");
     }
@@ -43,10 +34,10 @@ class Http {
     try {
       const response = await fetch(url, { credentials: "include" });
       const data = await response.json();
-
-      return data.data as IAccounting;
+      return data;
     } catch {
       console.error("An error occurred. Please try again.");
+      throw new Error("An error occurred. Please try again.");
     }
   }
 

@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { AccountingIcon, HomeIcon, UserIcon } from "../../../../assets/icons";
+import { AccountingIcon, HomeIcon, UserIcon } from "../../assets/icons";
 
 interface INavLinkComp {
   to: string;

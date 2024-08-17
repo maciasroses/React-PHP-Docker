@@ -1,10 +1,10 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { UserClient } from "../../../services";
 import { useAuth } from "../../../hooks/useAuth";
 import { INITIAL_STATE_RESPONSE } from "../../../constants";
 import SubmitButton from "../../../components/Submitbutton";
 import type { ILoginState } from "../../../interfaces";
-import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   const { setUser } = useAuth();
@@ -29,20 +29,20 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="w-full h-screen flex justify-center items-center dark:text-white">
-      <div className="flex flex-col items-center gap-4">
+    <div className="w-full h-screen flex justify-center items-center dark:text-white px-4 pt-20">
+      <div className="flex flex-col items-center gap-4 max-h-full overflow-y-scroll py-4">
         <Link to="/" className="text-4xl">
           LOGO
         </Link>
         <div className="flex flex-col items-center gap-2">
-          <h1 className=" text-6xl">Login</h1>
+          <h1 className="text-3xl md:text-6xl">Login</h1>
           {badResponse.message && (
             <p className="text-red-600">{badResponse.message}</p>
           )}
           <form onSubmit={submitAction}>
             <fieldset disabled={isPending}>
-              <div className="flex flex-col gap-4 text-xl">
-                <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-4 text-base md:text-xl">
+                <div className="flex flex-col gap-2 w-full">
                   <label htmlFor="email">Email</label>
                   <input
                     type="email"
@@ -61,7 +61,7 @@ const LoginPage = () => {
                     </small>
                   )}
                 </div>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 w-full">
                   <label htmlFor="password">Password</label>
                   <input
                     type="password"

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { IUser } from "../../../../interfaces";
-import { UserClient } from "../../../../services";
+import { UserClient } from "../../services";
+import { useCustomTranslation } from "../../hooks";
 import { useEffect, useRef, useState } from "react";
-import { useCustomTranslation } from "../../../../hooks";
+import type { IUser } from "../../interfaces";
 
 interface IProfileLink {
   to: string;

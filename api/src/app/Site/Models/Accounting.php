@@ -51,7 +51,8 @@ class Accounting extends BaseModel
         $query->order('date', 'desc');
 
         $page = isset($queryParams['page']) ? (int) $queryParams['page'] : 1;
-        $pageSize = isset($queryParams['pageSize']) ? (int) $queryParams['pageSize'] : 3;
+        // $pageSize = isset($queryParams['pageSize']) ? (int) $queryParams['pageSize'] : 6;
+        $pageSize = 6;
         $offset = ($page - 1) * $pageSize;
 
         $result = $query->execute($params);

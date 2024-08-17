@@ -1,6 +1,6 @@
 import NavLinkComp from "./NavLinkComp";
-import { IUser } from "../../../../interfaces";
-import { useCustomTranslation } from "../../../../hooks";
+import { useCustomTranslation } from "../../hooks";
+import type { IUser } from "../../interfaces";
 
 const Sidebar = ({ user }: { user: IUser }) => {
   const sidebar = useCustomTranslation("sidebar");

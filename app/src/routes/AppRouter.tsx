@@ -1,9 +1,8 @@
 import { useAuth } from "../hooks";
-import { Loading } from "../components";
 import { useRoutes } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { SiteRoutes, AuthRoutes, AdminRoutes } from "./index";
-import { Footer, Header, Sidebar } from "../pages/Auth/components";
+import { Loading, Footer, Header, Sidebar } from "../components";
 import type { IUser } from "../interfaces";
 
 export default function AppRouter() {
@@ -44,7 +43,7 @@ export default function AppRouter() {
 
 const MainSection = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main className="w-full min-h-screen max-w-[1440px] mx-auto">
+    <main className="w-full min-h-screen max-w-[1440px] mx-auto bg-gray-200 dark:bg-gray-900">
       {children}
     </main>
   );

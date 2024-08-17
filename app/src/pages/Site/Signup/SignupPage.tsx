@@ -29,21 +29,21 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="w-full h-screen flex justify-center items-center dark:text-white">
-      <div className="flex flex-col items-center gap-4">
+    <div className="w-full h-screen flex justify-center items-center dark:text-white px-4 pt-20">
+      <div className="flex flex-col items-center gap-4 max-h-full overflow-y-scroll py-4">
         <Link to="/" className="text-4xl">
           LOGO
         </Link>
         <div className="flex flex-col items-center gap-2">
-          <h1 className=" text-6xl">Sign up</h1>
+          <h1 className="text-3xl md:text-6xl">Sign up</h1>
           {badResponse.message && (
             <p className="text-red-600">{badResponse.message}</p>
           )}
           <form onSubmit={submitAction}>
             <fieldset disabled={isPending}>
-              <div className="flex flex-col gap-4 text-xl">
-                <div className="flex gap-4 w-full">
-                  <div className="flex flex-col gap-2 w-1/2">
+              <div className="flex flex-col gap-4 text-base md:text-xl">
+                <div className="flex flex-col sm:flex-row gap-4 w-full">
+                  <div className="flex flex-col gap-2 w-full sm:w-1/2">
                     <label htmlFor="name">Name</label>
                     <input
                       type="text"
@@ -62,7 +62,7 @@ const SignupPage = () => {
                       </small>
                     )}
                   </div>
-                  <div className="flex flex-col gap-2 w-1/2">
+                  <div className="flex flex-col gap-2 w-full sm:w-1/2">
                     <label htmlFor="email">Email</label>
                     <input
                       type="email"
@@ -82,8 +82,8 @@ const SignupPage = () => {
                     )}
                   </div>
                 </div>
-                <div className="flex gap-4 w-full">
-                  <div className="flex flex-col gap-2 w-1/2">
+                <div className="flex flex-col sm:flex-row gap-4 w-full">
+                  <div className="flex flex-col gap-2 w-full sm:w-1/2">
                     <label htmlFor="password">Password</label>
                     <input
                       type="password"
@@ -102,7 +102,7 @@ const SignupPage = () => {
                       </small>
                     )}
                   </div>
-                  <div className="flex flex-col gap-2 w-1/2">
+                  <div className="flex flex-col gap-2 w-full sm:w-1/2">
                     <label htmlFor="confirmPassword">Confirm Password</label>
                     <input
                       type="password"

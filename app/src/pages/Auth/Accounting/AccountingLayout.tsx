@@ -1,7 +1,7 @@
+import { ErrorBoundary } from "@/components";
 import { useTranslation } from "react-i18next";
+import { useCustomTranslation } from "@/hooks";
 import { Link, Outlet } from "react-router-dom";
-import { useCustomTranslation } from "../../../hooks";
-import { ErrorBoundary } from "../../../components";
 
 const AccountingLayout = () => {
   const { t } = useTranslation();

@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { HomePage, LoginPage, SignupPage } from "../../pages/Site";
+import { HomePage, LoginPage, SignupPage } from "@/pages/Site";
 
 export const SiteRoutes = [
   {

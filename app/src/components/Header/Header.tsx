@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import ProfileMenu from "./ProfileMenu";
 import LangSelector from "./LangSelector";
 import ThemeSelector from "./ThemeSelector";
-import type { IUser } from "../../interfaces";
+import type { IUser } from "@/interfaces";
 
 const Header = ({ user }: { user: IUser }) => {
   return (

@@ -1,13 +1,10 @@
 import { useState } from "react";
-import { TrashIcon } from "../../../../assets/icons";
-import { AccountingClient } from "../../../../services";
-import { Modal, SubmitButton } from "../../../../components";
-import { INITIAL_STATE_RESPONSE } from "../../../../constants";
-import { useCustomTranslation, useModal } from "../../../../hooks";
-import type {
-  IAccounting,
-  IAccountingDeleteState,
-} from "../../../../interfaces";
+import { TrashIcon } from "@/assets/icons";
+import { AccountingClient } from "@/services";
+import { Modal, SubmitButton } from "@/components";
+import { INITIAL_STATE_RESPONSE } from "@/constants";
+import { useCustomTranslation, useModal } from "@/hooks";
+import type { IAccounting, IAccountingDeleteState } from "@/interfaces";
 
 const DeleteButton = ({ accounting }: { accounting: IAccounting }) => {
   const { deleteButton } = useCustomTranslation("accounting");

@@ -13,13 +13,11 @@ class Accounting extends BaseModel
         'amount',
         'type',
         'currency',
-        'date'
-    ];
-    protected $hidden = [
-        'user_id',
+        'date',
         'created_at',
         'updated_at',
     ];
+    protected $hidden = 'user_id';
 
     public function getAllMyAccounting($userId, $queryParams)
     {

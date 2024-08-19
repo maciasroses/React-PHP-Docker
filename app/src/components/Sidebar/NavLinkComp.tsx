@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { AccountingIcon, HomeIcon, UserIcon } from "../../assets/icons";
+import { AccountingIcon, HomeIcon, UserIcon } from "@/assets/icons";
 
 interface INavLinkComp {
   to: string;
@@ -8,7 +8,7 @@ interface INavLinkComp {
 }
 
 const NavLinkComp = ({ to, span, icon }: INavLinkComp) => {
-  const isActive = window.location.pathname === to;
+  const isActive = window.location.pathname.startsWith(to);
   return (
     <NavLink
       to={to}

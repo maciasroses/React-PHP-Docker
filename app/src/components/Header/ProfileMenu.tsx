@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { UserClient } from "../../services";
-import { useCustomTranslation } from "../../hooks";
+import { UserClient } from "@/services";
+import { useCustomTranslation } from "@/hooks";
 import { useEffect, useRef, useState } from "react";
-import type { IUser } from "../../interfaces";
+import type { IUser } from "@/interfaces";
 
 interface IProfileLink {
   to: string;
@@ -97,7 +97,7 @@ const ProfileMenu = ({ user }: { user: IUser }) => {
               />
               {user.role === "admin" && (
                 <ProfileLink
-                  to="/admin/user"
+                  to="/admin/users"
                   onClick={closeMenu}
                   text={profileMenu.user}
                 />

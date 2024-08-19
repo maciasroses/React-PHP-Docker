@@ -1,7 +1,6 @@
-import AccountingCard from "./AccountingCard";
 import { useTranslation } from "react-i18next";
-import { Card404 } from "../../../../../components";
-import type { IAccounting } from "../../../../../interfaces";
+import { AccountingCard, Card404 } from "@/components";
+import type { IAccounting } from "@/interfaces";
 
 interface AccountingListPageProps {
   accountings: IAccounting[];
@@ -16,7 +15,7 @@ const AccountingList = ({ accountings }: AccountingListPageProps) => {
       {accountings.length > 0 ? (
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-6">
           {accountings.map((accounting) => (
-            <AccountingCard key={accounting.id} accounting={accounting} />
+            <AccountingCard key={accounting.id} data={accounting} lng={lng} />
           ))}
         </div>
       ) : (

@@ -1,6 +1,6 @@
 import NavLinkComp from "./NavLinkComp";
-import { useCustomTranslation } from "../../hooks";
-import type { IUser } from "../../interfaces";
+import { useCustomTranslation } from "@/hooks";
+import type { IUser } from "@/interfaces";
 
 const Sidebar = ({ user }: { user: IUser }) => {
   const sidebar = useCustomTranslation("sidebar");
@@ -18,7 +18,7 @@ const Sidebar = ({ user }: { user: IUser }) => {
           </li>
           {user.role === "admin" && (
             <li>
-              <NavLinkComp icon="user" span={sidebar.user} to="/admin/user" />
+              <NavLinkComp icon="user" span={sidebar.user} to="/admin/users" />
             </li>
           )}
           <li>

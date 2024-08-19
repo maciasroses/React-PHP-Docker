@@ -22,6 +22,36 @@ export interface IAccounting {
   currency: string;
   date: Date;
   id: string;
+  created_at: Date;
+  updated_at: Date;
+}
+
+export interface IAdminUserForIAdminAccounting {
+  user_id: string;
+  user_name: string;
+  user_email: string;
+  user_role: string;
+}
+
+export interface IAdminAccouning extends IAdminUserForIAdminAccounting {
+  id: string;
+  description: string;
+  amount: number;
+  type: string;
+  currency: string;
+  date: Date;
+  created_at: Date;
+  updated_at: Date;
+}
+
+export interface IAdminUser {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  created_at: Date;
+  updated_at: Date;
+  accounting: IAccounting[];
 }
 
 export interface IAccountingsForBarChart {

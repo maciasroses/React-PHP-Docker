@@ -6,20 +6,20 @@ const BarChartSkeleton = () => {
         <div className="w-48 h-2 mb-10 bg-gray-300 rounded-full dark:bg-gray-700"></div>
       </div>
       <div className="flex items-baseline mt-4">
-        <div className="w-full bg-gray-300 rounded-t-lg h-72 dark:bg-gray-700"></div>
-        <div className="w-full bg-gray-300 rounded-t-lg h-80 ms-6 dark:bg-gray-700"></div>
-        <div className="w-full h-56 ms-6 bg-gray-300 rounded-t-lg dark:bg-gray-700"></div>
-        <div className="hidden md:block w-full bg-gray-300 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
-        <div className="w-full bg-gray-300 rounded-t-lg h-80 ms-6 dark:bg-gray-700"></div>
-        <div className="hidden md:block w-full bg-gray-300 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
-        <div className="hidden md:block w-full h-64 ms-6 bg-gray-300 rounded-t-lg dark:bg-gray-700"></div>
-        <div className="w-full bg-gray-300 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
-        <div className="w-full bg-gray-300 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
-        <div className="hidden md:block w-full bg-gray-300 rounded-t-lg h-80 ms-6 dark:bg-gray-700"></div>
-        <div className="w-full bg-gray-300 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
-        <div className="w-full bg-gray-300 rounded-t-lg h-80 ms-6 dark:bg-gray-700"></div>
-        <div className="w-full bg-gray-300 rounded-t-lg h-64 ms-6 dark:bg-gray-700"></div>
-        <div className="hidden md:block w-full bg-gray-300 rounded-t-lg h-72 ms-6 dark:bg-gray-700"></div>
+        <div className="w-full bg-gray-300 rounded-t-lg h-52 dark:bg-gray-700"></div>
+        <div className="w-full bg-gray-300 rounded-t-lg h-40 ms-6 dark:bg-gray-700"></div>
+        <div className="w-full h-36 ms-6 bg-gray-300 rounded-t-lg dark:bg-gray-700"></div>
+        <div className="hidden md:block w-full bg-gray-300 rounded-t-lg h-52 ms-6 dark:bg-gray-700"></div>
+        <div className="w-full bg-gray-300 rounded-t-lg h-40 ms-6 dark:bg-gray-700"></div>
+        <div className="hidden md:block w-full bg-gray-300 rounded-t-lg h-52 ms-6 dark:bg-gray-700"></div>
+        <div className="hidden md:block w-full h-36 ms-6 bg-gray-300 rounded-t-lg dark:bg-gray-700"></div>
+        <div className="w-full bg-gray-300 rounded-t-lg h-52 ms-6 dark:bg-gray-700"></div>
+        <div className="w-full bg-gray-300 rounded-t-lg h-52 ms-6 dark:bg-gray-700"></div>
+        <div className="hidden md:block w-full bg-gray-300 rounded-t-lg h-40 ms-6 dark:bg-gray-700"></div>
+        <div className="w-full bg-gray-300 rounded-t-lg h-52 ms-6 dark:bg-gray-700"></div>
+        <div className="w-full bg-gray-300 rounded-t-lg h-40 ms-6 dark:bg-gray-700"></div>
+        <div className="w-full bg-gray-300 rounded-t-lg h-36 ms-6 dark:bg-gray-700"></div>
+        <div className="hidden md:block w-full bg-gray-300 rounded-t-lg h-52 ms-6 dark:bg-gray-700"></div>
       </div>
       <span className="sr-only">Loading...</span>
     </div>

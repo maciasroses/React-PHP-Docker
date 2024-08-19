@@ -1,5 +1,5 @@
 import { validateUser } from "./schema";
-import type { ILoginState, IRegisterState } from "../../interfaces";
+import type { ILoginState, IRegisterState } from "@/interfaces";
 
 class Http {
   #url = "http://localhost/api";

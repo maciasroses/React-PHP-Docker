@@ -1,6 +1,6 @@
-import { UserClient } from "../services";
+import { UserClient } from "@/services";
 import { createContext, ReactNode, useEffect, useState } from "react";
-import type { IUser } from "../interfaces";
+import type { IUser } from "@/interfaces";
 
 export interface IAuthContext {
   user: IUser | null;

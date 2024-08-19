@@ -1,11 +1,11 @@
 import { useCallback } from "react";
+import { Loading } from "@/components";
+import { useClientFetch } from "@/hooks";
 import { useParams } from "react-router-dom";
+import { AccountingClient } from "@/services";
 import { useTranslation } from "react-i18next";
 import { AccountingForm } from "../components";
-import { Loading } from "../../../../components";
-import { useClientFetch } from "../../../../hooks";
-import { IAccounting } from "../../../../interfaces";
-import { AccountingClient } from "../../../../services";
+import type { IAccounting } from "@/interfaces";
 
 const EditAccountingPage = () => {
   const { t } = useTranslation();

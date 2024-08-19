@@ -1,5 +1,5 @@
-import { useCustomTranslation } from "../hooks";
-import type { IUser } from "../interfaces";
+import { useCustomTranslation } from "@/hooks";
+import type { IUser } from "@/interfaces";
 
 const Footer = ({ user }: { user: IUser }) => {
   const footer = useCustomTranslation("footer");

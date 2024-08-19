@@ -15,6 +15,14 @@ class User extends BaseController
         $this->model = new AdminUserModel();
     }
 
+    public function getAllUsers()
+    {
+        $queryParams = $this->request->parameters();
+        $users = $this->model->getAllUsers($queryParams);
+
+        return $this->response(200, $users);
+    }
+
     public function getMe()
     {
         $requestUser = $this->request->admin();

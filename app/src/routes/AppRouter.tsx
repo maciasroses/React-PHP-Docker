@@ -1,9 +1,9 @@
-import { useAuth } from "../hooks";
+import { useAuth } from "@/hooks";
 import { useRoutes } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { SiteRoutes, AuthRoutes, AdminRoutes } from "./index";
-import { Loading, Footer, Header, Sidebar } from "../components";
-import type { IUser } from "../interfaces";
+import { Loading, Footer, Header, Sidebar } from "@/components";
+import type { IUser } from "@/interfaces";
 
 export default function AppRouter() {
   const { t } = useTranslation();

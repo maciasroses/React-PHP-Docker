@@ -1,6 +1,6 @@
 // OPTION WITHOUT TRANSFORM:
 
-import { IResponse } from "../interfaces";
+import { IResponse } from "@/interfaces";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 

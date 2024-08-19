@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { MXFlag, USFlag } from "../../assets/icons";
+import { MXFlag, USFlag } from "@/assets/icons";
 import { useEffect, useRef, useState } from "react";
 
 interface ISwitchButton {

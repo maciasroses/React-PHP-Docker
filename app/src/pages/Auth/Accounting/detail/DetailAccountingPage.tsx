@@ -1,14 +1,13 @@
 import { useCallback } from "react";
+import { Loading } from "@/components";
+import { useClientFetch } from "@/hooks";
+import { PencilIcon } from "@/assets/icons";
 import { DeleteButton } from "../components";
+import { AccountingClient } from "@/services";
 import { useTranslation } from "react-i18next";
-import { Loading } from "../../../../components";
-import { useClientFetch } from "../../../../hooks";
 import { Link, useParams } from "react-router-dom";
-import { PencilIcon } from "../../../../assets/icons";
-import { AccountingClient } from "../../../../services";
-import formatDateAmerican from "../../../../utils/formatDateAmerican";
-import formatDateLatinAmerican from "../../../../utils/formatDateLatinAmerican";
-import type { IAccounting } from "../../../../interfaces";
+import { formatDateAmerican, formatDateLatinAmerican } from "@/utils";
+import type { IAccounting } from "@/interfaces";
 
 const DetailAccountingPage = () => {
   const { t } = useTranslation();
@@ -37,7 +36,7 @@ const DetailAccountingPage = () => {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center border border-gray-500 max-w-[500px] m-auto mt-10 rounded-lg">
         <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {accounting?.description}
         </h1>

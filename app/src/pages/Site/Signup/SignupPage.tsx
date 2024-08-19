@@ -1,10 +1,10 @@
-import { UserClient } from "../../../services";
-import { useAuth } from "../../../hooks/useAuth";
 import { useState } from "react";
-import SubmitButton from "../../../components/Submitbutton";
-import { INITIAL_STATE_RESPONSE } from "../../../constants";
-import type { IRegisterState } from "../../../interfaces";
+import { useAuth } from "@/hooks";
 import { Link } from "react-router-dom";
+import { UserClient } from "@/services";
+import { SubmitButton } from "@/components";
+import { INITIAL_STATE_RESPONSE } from "@/constants";
+import type { IRegisterState } from "@/interfaces";
 
 const SignupPage = () => {
   const { setUser } = useAuth();
@@ -30,7 +30,7 @@ const SignupPage = () => {
 
   return (
     <div className="w-full h-screen flex justify-center items-center dark:text-white px-4 pt-20">
-      <div className="flex flex-col items-center gap-4 max-h-full overflow-y-scroll py-4">
+      <div className="flex flex-col items-center gap-4 max-h-full overflow-y-auto py-4">
         <Link to="/" className="text-4xl">
           LOGO
         </Link>

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { useCustomTranslation, useTheme } from "../../hooks";
-import { DarkIcon, LightIcon, SystemIcon } from "../../assets/icons";
+import { useCustomTranslation, useTheme } from "@/hooks";
+import { DarkIcon, LightIcon, SystemIcon } from "@/assets/icons";
 
 interface IThemeButton {
   theme: string;

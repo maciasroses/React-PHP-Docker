@@ -1,5 +1,5 @@
 import { validateAccounting } from "./schema";
-import type { IAccountingCreateNUpdateState } from "../../interfaces";
+import type { IAccountingCreateNUpdateState } from "@/interfaces";
 
 class Http {
   #url = "http://localhost/api";

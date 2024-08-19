@@ -1,4 +1,5 @@
-import { useCustomTranslation } from "../../../../hooks";
+import { useEffect } from "react";
+import { useCustomTranslation } from "@/hooks";
 import { Link, useSearchParams } from "react-router-dom";
 
 const Pagination = ({ totalPages }: { totalPages: number }) => {
@@ -6,6 +7,10 @@ const Pagination = ({ totalPages }: { totalPages: number }) => {
   const pathname = window.location.pathname;
   const [searchParams] = useSearchParams();
   const currentPage = Number(searchParams.get("page")) || 1;
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
 
   const createPageURL = (pageNumber: number | string) => {
     const newParams = new URLSearchParams(searchParams);

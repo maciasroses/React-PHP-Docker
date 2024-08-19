@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useCustomTranslation } from "../../../hooks";
+import { useCustomTranslation } from "@/hooks";
 
 const HomePage = () => {
   const index = useCustomTranslation("index");

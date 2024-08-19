@@ -1,12 +1,13 @@
 import { Navigate, Outlet } from "react-router-dom";
 import {
   HomePage,
-  AccountingLayout,
   AccountingPage,
+  AccountingLayout,
   AddAccountingPage,
   EditAccountingPage,
   DetailAccountingPage,
-} from "../../pages/Auth";
+} from "@/pages/Auth";
+import { Card404 } from "@/components";
 
 export const AuthRoutes = [
   {
@@ -51,7 +52,12 @@ export const AuthRoutes = [
       },
       {
         path: "*",
-        element: <div>Not found</div>,
+        element: (
+          <Card404
+            title="Page not found"
+            description="The page you are looking for does not exist"
+          />
+        ),
       },
     ],
   },

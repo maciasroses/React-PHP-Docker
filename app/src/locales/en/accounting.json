@@ -52,7 +52,7 @@
       }
     },
     "description": "Description",
-    "descriptionPlaceholder": "This is description example",
+    "descriptionPlaceholder": "This is a description example",
     "cancelButton": "Cancel",
     "createButton": "Create",
     "updateButton": "Update"

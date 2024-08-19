@@ -1,14 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { SubmitButton } from "../../../../components";
-import { AccountingClient } from "../../../../services";
-import { useCustomTranslation } from "../../../../hooks";
-import formatDateForDateInput from "../../../../utils/formatDateForInput";
-import { INITIAL_STATE_RESPONSE } from "../../../../constants";
-import type {
-  IAccounting,
-  IAccountingCreateNUpdateState,
-} from "../../../../interfaces";
+import { SubmitButton } from "@/components";
+import { AccountingClient } from "@/services";
+import { useCustomTranslation } from "@/hooks";
+import { INITIAL_STATE_RESPONSE } from "@/constants";
+import formatDateForDateInput from "@/utils/formatDateForInput";
+import type { IAccounting, IAccountingCreateNUpdateState } from "@/interfaces";
 
 const AccountingForm = ({
   accounting,
@@ -41,7 +38,7 @@ const AccountingForm = ({
   };
 
   return (
-    <div className="flex flex-col items-center gap-4 dark:text-white">
+    <div className="flex flex-col items-center gap-4 dark:text-white mt-10">
       <div className="flex flex-col items-center gap-2">
         <h1 className="text-4xl">
           {isEditing ? accountingForm.editTitle : accountingForm.createTitle}
@@ -58,6 +55,7 @@ const AccountingForm = ({
                 <label htmlFor="amount">{accountingForm.amount}</label>
                 <input
                   type="number"
+                  step="0.01"
                   name="amount"
                   id="amount"
                   placeholder="200"

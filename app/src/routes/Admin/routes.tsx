@@ -1,5 +1,18 @@
+import { Card404 } from "@/components";
 import { Navigate, Outlet } from "react-router-dom";
-import { HomePage } from "../../pages/Admin";
+import {
+  HomePage,
+  UsersPage,
+  AddUserPage,
+  UsersLayout,
+  EditUserPage,
+  DetailUserPage,
+  AccountingPage,
+  AccountingLayout,
+  AddAccountingPage,
+  EditAccountingPage,
+  DetailAccountingPage,
+} from "@/pages/Admin";
 
 export const AdminRoutes = [
   {
@@ -15,16 +28,69 @@ export const AdminRoutes = [
         element: <HomePage />,
       },
       {
-        path: "user",
-        element: <div>Users</div>,
+        path: "users",
+        element: <UsersLayout />,
+        children: [
+          {
+            index: true,
+            element: <UsersPage />,
+          },
+          {
+            path: "add",
+            element: <AddUserPage />,
+          },
+          {
+            path: ":id",
+            element: <Outlet />,
+            children: [
+              {
+                index: true,
+                element: <DetailUserPage />,
+              },
+              {
+                path: "edit",
+                element: <EditUserPage />,
+              },
+            ],
+          },
+        ],
       },
       {
         path: "accounting",
-        element: <div>Accountings</div>,
+        element: <AccountingLayout />,
+        children: [
+          {
+            index: true,
+            element: <AccountingPage />,
+          },
+          {
+            path: "add",
+            element: <AddAccountingPage />,
+          },
+          {
+            path: ":id",
+            element: <Outlet />,
+            children: [
+              {
+                index: true,
+                element: <DetailAccountingPage />,
+              },
+              {
+                path: "edit",
+                element: <EditAccountingPage />,
+              },
+            ],
+          },
+        ],
       },
       {
         path: "*",
-        element: <div>Not found</div>,
+        element: (
+          <Card404
+            title="Page not found"
+            description="The page you are looking for does not exist"
+          />
+        ),
       },
     ],
   },

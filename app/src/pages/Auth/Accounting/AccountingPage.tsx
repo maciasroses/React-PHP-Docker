@@ -1,14 +1,14 @@
 import { useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
-import { AccountingClient } from "../../../services";
-import { useClientFetch, useCustomTranslation } from "../../../hooks";
+import { AccountingClient } from "@/services";
+import { useClientFetch, useCustomTranslation } from "@/hooks";
 import {
   AccountingList,
   AccountingListSkeleton,
   Pagination,
   Searchbar,
 } from "./components";
-import type { IAccountingList } from "../../../interfaces";
+import type { IAccountingList } from "@/interfaces";
 
 const AccountingPage = () => {
   const [searchParams] = useSearchParams();

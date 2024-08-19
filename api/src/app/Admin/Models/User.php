@@ -11,14 +11,46 @@ class User extends BaseModel
     protected $fillable = [
         'name',
         'email',
-        'role'
+        'role',
+        'created_at',
+        'updated_at'
     ];
     protected $hidden = [
         'password',
-        'session_id',
-        'created_at',
-        'updated_at',
+        'session_id'
     ];
+
+    public function getAllUsers($queryParams)
+    {
+        $fields = $this->fillable;
+        $fields[] = $this->primaryKey;
+
+        $query = $this->db
+            ->table($this->table)
+            ->select($fields);
+
+        $params = [];
+
+        if (isset($queryParams['q']) && $queryParams['q'] !== '') {
+            $query->appendCustomSql("AND (name LIKE :q OR email LIKE :q)");
+            $params['q'] = '%' . $queryParams['q'] . '%';
+        }
+
+        if (isset($queryParams['role']) && $queryParams['role'] !== '') {
+            $query->appendCustomSql("AND role = :role");
+            $params['role'] = $queryParams['role'];
+        }
+
+        $result = $query->execute($params);
+
+        $accounting = new Accounting();
+
+        foreach ($result as $key => $value) {
+            $result[$key]['accounting'] = $accounting->getAccountingByUserId($value['id']);
+        }
+
+        return $result;
+    }
 
     public function getMeById($id)
     {

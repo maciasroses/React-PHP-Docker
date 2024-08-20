@@ -1,62 +1,17 @@
 import { useState } from "react";
-import { AccountingCard, Datatable, ProfileCard } from "@/components";
+import { AccountingCard, Card404, Datatable, ProfileCard } from "@/components";
 import type { IAdminAccouning } from "@/interfaces";
 import type {
   ConditionalStyles,
   ExpanderComponentProps,
 } from "react-data-table-component";
-
-const columns = [
-  {
-    name: "Responsible",
-    selector: (row: { user_name: string }) => row.user_name,
-    sortable: true,
-  },
-  {
-    name: "Description",
-    selector: (row: { description: string }) => row.description,
-    sortable: true,
-  },
-  {
-    name: "Amount",
-    selector: (row: { amount: number }) => Number(row.amount),
-    sortable: true,
-  },
-  {
-    name: "Currency",
-    selector: (row: { currency: string }) => row.currency,
-    sortable: true,
-  },
-  {
-    name: "Type",
-    selector: (row: { type: string }) => row.type,
-    sortable: true,
-  },
-  {
-    name: "Date",
-    selector: (row: { date: Date }) => row.date.toString(),
-    sortable: true,
-  },
-  {
-    name: "Created At",
-    selector: (row: { created_at: Date }) => row.created_at.toString(),
-    sortable: true,
-  },
-  {
-    name: "Updated At",
-    selector: (row: { updated_at: Date }) => row.updated_at.toString(),
-    sortable: true,
-  },
-  {
-    name: "Actions",
-    cell: (row: { id: string }) => (
-      <div className="flex justify-center items-center gap-2">
-        <button onClick={() => alert(JSON.stringify(row))}>Edit</button>
-        <button onClick={() => alert(JSON.stringify(row))}>Delete</button>
-      </div>
-    ),
-  },
-];
+import { PencilIcon, TrashIcon } from "@/assets/icons";
+import {
+  formatAmount,
+  formatDateAmerican,
+  formatDateLatinAmerican,
+  formatType,
+} from "@/utils";
 
 const ExpandedComponent: React.FC<
   ExpanderComponentProps<IAdminAccouning> & { lng: string }
@@ -116,10 +71,10 @@ const conditionalRowStyles = (
 };
 
 const AccountingDatatable = ({
-  data,
+  accountings,
   lng,
 }: {
-  data: IAdminAccouning[];
+  accountings: IAdminAccouning[];
   lng: string;
 }) => {
   const [showMultiActions, setShowMultiActions] = useState(false);
@@ -136,23 +91,127 @@ const AccountingDatatable = ({
     console.log(selectedRows);
   };
 
+  const columns = [
+    {
+      name: lng === "en" ? "Actions" : "Acciones",
+      width: "100px",
+      cell: (row: { id: string }) => (
+        <div className="flex justify-center items-center gap-2">
+          <button
+            onClick={() => alert(JSON.stringify(row))}
+            className="rounded-md p-1 hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-blue-300 text-blue-700 bg-blue-100 dark:bg-blue-700 border border-blue-700 dark:border-blue-300"
+          >
+            <PencilIcon />
+          </button>
+          <button
+            onClick={() => alert(JSON.stringify(row))}
+            className="rounded-md p-1 hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-red-300 text-red-700 bg-red-100 dark:bg-red-700 border border-red-700 dark:border-red-300"
+          >
+            <TrashIcon />
+          </button>
+        </div>
+      ),
+    },
+    {
+      name: lng === "en" ? "Responsible" : "Responsable",
+      width: "150px",
+      selector: (row: { user_name: string }) => row.user_name,
+      sortable: true,
+    },
+    {
+      name: lng === "en" ? "Description" : "Descripción",
+      width: "200px",
+      selector: (row: { description: string }) => row.description,
+      sortable: true,
+    },
+    {
+      name: lng === "en" ? "Amount" : "Monto",
+      width: "150px",
+      selector: (row: { amount: number }) => Number(row.amount),
+      sortable: true,
+      format: (row: { currency: string; amount: number }) =>
+        formatAmount(row.amount, row.currency),
+    },
+    {
+      name: lng === "en" ? "Currency" : "Moneda",
+      width: "100px",
+      selector: (row: { currency: string }) => row.currency,
+      sortable: true,
+    },
+    {
+      name: lng === "en" ? "Type" : "Tipo",
+      width: "120px",
+      selector: (row: { type: string }) => row.type,
+      sortable: true,
+      format: (row: { type: string }) => formatType(lng, row.type),
+    },
+    {
+      name: lng === "en" ? "Date" : "Fecha",
+      width: "190px",
+      selector: (row: { date: Date }) => row.date.toString(),
+      sortable: true,
+      format: (row: { date: Date }) =>
+        lng === "en"
+          ? formatDateAmerican(row.date)
+          : formatDateLatinAmerican(row.date),
+    },
+    {
+      name: lng === "en" ? "Created At" : "Creado en",
+      width: "190px",
+      selector: (row: { created_at: Date }) => row.created_at.toString(),
+      sortable: true,
+      format: (row: { created_at: Date }) =>
+        lng === "en"
+          ? formatDateAmerican(row.created_at)
+          : formatDateLatinAmerican(row.created_at),
+    },
+    {
+      name: lng === "en" ? "Updated At" : "Actualizado en",
+      width: "190px",
+      selector: (row: { updated_at: Date }) => row.updated_at.toString(),
+      sortable: true,
+      format: (row: { updated_at: Date }) =>
+        lng === "en"
+          ? formatDateAmerican(row.updated_at)
+          : formatDateLatinAmerican(row.updated_at),
+    },
+  ];
+
   return (
     <>
-      {showMultiActions && (
-        <div className="flex justify-center items-center gap-2">
-          <button onClick={() => alert("Edit")}>Edit</button>
-          <button onClick={() => alert("Delete")}>Delete</button>
-        </div>
+      {accountings.length > 0 ? (
+        <>
+          {showMultiActions && (
+            <div className="flex justify-center items-center gap-2">
+              <button onClick={() => alert("Edit")}>Edit</button>
+              <button onClick={() => alert("Delete")}>Delete</button>
+            </div>
+          )}
+          <Datatable
+            lng={lng}
+            columns={columns}
+            data={accountings}
+            onSelectedRowsChange={handleSelectRows}
+            expandableRowsComponent={(props) => (
+              <ExpandedComponent {...props} lng={lng} />
+            )}
+            conditionalRowStyles={conditionalRowStyles}
+          />
+        </>
+      ) : (
+        <Card404
+          title={
+            lng === "en"
+              ? "Accountings were not found for show"
+              : "No se encontraron contabilidades para mostrar"
+          }
+          description={
+            lng === "en"
+              ? "Try with another search or add a new one"
+              : "Intenta con otra búsqueda o agrega una nueva"
+          }
+        />
       )}
-      <Datatable
-        columns={columns}
-        data={data}
-        onSelectedRowsChange={handleSelectRows}
-        expandableRowsComponent={(props) => (
-          <ExpandedComponent {...props} lng={lng} />
-        )}
-        conditionalRowStyles={conditionalRowStyles}
-      />
     </>
   );
 };

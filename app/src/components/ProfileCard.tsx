@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import type { IAdminUser } from "@/interfaces";
+import type { IAdminUserForIAdminAccounting } from "@/interfaces";
 
 interface IProfileCard {
-  data: IAdminUser;
+  data: IAdminUserForIAdminAccounting;
 }
 
 const ProfileCard = ({ data }: IProfileCard) => {

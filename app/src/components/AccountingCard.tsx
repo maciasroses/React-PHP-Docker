@@ -1,6 +1,11 @@
 import clsx from "clsx";
 import { Link } from "react-router-dom";
-import { formatDateAmerican, formatDateLatinAmerican } from "@/utils";
+import {
+  formatAmount,
+  formatDateAmerican,
+  formatDateLatinAmerican,
+  formatType,
+} from "@/utils";
 import type { IAccounting } from "@/interfaces";
 
 interface IAccountingCard {
@@ -35,13 +40,7 @@ const AccountingCard = ({ data, lng, isAdminView }: IAccountingCard) => {
               : "bg-blue-100 text-blue-800 dark:text-blue-400 border-blue-400"
           }`}
         >
-          {lng === "en"
-            ? data.type
-            : data.type === "Expense"
-            ? "Gasto"
-            : data.type === "Income"
-            ? "Ingreso"
-            : "Transferencia"}
+          {formatType(lng, data.type)}
         </p>
       </div>
       <div>
@@ -55,8 +54,7 @@ const AccountingCard = ({ data, lng, isAdminView }: IAccountingCard) => {
           : "text-blue-800 dark:text-blue-400"
       }`}
         >
-          {data.currency === "GBP" ? "£" : data.currency === "EUR" ? "€" : "$"}
-          {data.amount} {data.currency}
+          {formatAmount(data.amount, data.currency)} {data.currency}
         </p>
         <h5 className="text-center text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {data.description}

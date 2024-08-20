@@ -3,6 +3,7 @@ import useFetch from "./useFetch";
 import { useAuth } from "./useAuth";
 import { useTheme } from "./useTheme";
 import useClientFetch from "./useClientFetch";
+import { useSearchFilter } from "./useSearchFilter";
 import useCustomTranslation from "./useCustomTranslation";
 
 export {
@@ -11,5 +12,6 @@ export {
   useAuth,
   useTheme,
   useClientFetch,
+  useSearchFilter,
   useCustomTranslation,
 };

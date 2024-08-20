@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import { useResolvedTheme } from "@/hooks/useResolvedTheme";
 import type {
+  TableStyles,
   ConditionalStyles,
   ExpanderComponentProps,
 } from "react-data-table-component";
 
-const customStyles = (theme: string) => {
+const customStyles = (theme: string): TableStyles => {
   return {
     headRow: {
       style: {
@@ -14,12 +15,6 @@ const customStyles = (theme: string) => {
         color: theme === "dark" ? "#ffffff" : "#1f2937",
       },
     },
-    // subHeader: {
-    //   style: {
-    //     backgroundColor: theme === "dark" ? "#1f2937" : "#f9fafb",
-    //     color: theme === "dark" ? "#ffffff" : "#1f2937",
-    //   },
-    // },
     expanderButton: {
       style: {
         color: theme === "dark" ? "#fff" : "#000",
@@ -41,15 +36,16 @@ const customStyles = (theme: string) => {
 };
 
 const Datatable = <T extends object>({
+  lng,
   columns,
   data,
   onSelectedRowsChange,
   expandableRowsComponent,
   conditionalRowStyles,
 }: {
+  lng: string;
   columns: object[];
   data: T[];
-  // subHeaderComponen: ReactNode,
   onSelectedRowsChange: (selected: { selectedRows: T[] }) => void;
   expandableRowsComponent: React.FC<ExpanderComponentProps<T>>;
   conditionalRowStyles?: (theme: string) => ConditionalStyles<T>[];
@@ -76,15 +72,21 @@ const Datatable = <T extends object>({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const paginationComponentOptions = {
+    rowsPerPageText: lng === "en" ? "Rows per page:" : "Filas por página:",
+    rangeSeparatorText: lng === "en" ? "of" : "de",
+    selectAllRowsItem: true,
+    selectAllRowsItemText: lng === "en" ? "All" : "Todo",
+  };
+
   return (
     <DataTable
       columns={columns}
       data={data}
       pagination
+      paginationComponentOptions={paginationComponentOptions}
       fixedHeader
       fixedHeaderScrollHeight={scrollHeight}
-      // subHeader
-      // subHeaderComponent={subHeaderComponen}
       selectableRows
       onSelectedRowsChange={onSelectedRowsChange}
       expandableRows

@@ -73,6 +73,78 @@ export interface ISearchParams {
   page: string;
 }
 
+export interface ISearchbar {
+  searchbarProps: {
+    search: string;
+    filters: {
+      user: string;
+      date: {
+        from: string;
+        to: string;
+      };
+      amount: {
+        from: string;
+        to: string;
+      };
+      currencies: {
+        title: string;
+        description: string;
+        mainOption: string;
+        options: {
+          USD: string;
+          MXN: string;
+          EUR: string;
+          GBP: string;
+        };
+      };
+      types: {
+        title: string;
+        description: string;
+        mainOption: string;
+        options: {
+          Income: string;
+          Expense: string;
+          Transfer: string;
+        };
+      };
+    };
+    clearFilters: string;
+  };
+}
+
+export interface IAccountingForm {
+  createTitle: string;
+  editTitle: string;
+  amount: string;
+  date: string;
+  currency: {
+    title: string;
+    description: string;
+    mainOption: string;
+    options: {
+      USD: string;
+      MXN: string;
+      EUR: string;
+      GBP: string;
+    };
+  };
+  type: {
+    title: string;
+    description: string;
+    mainOption: string;
+    options: {
+      Income: string;
+      Expense: string;
+      Transfer: string;
+    };
+  };
+  description: string;
+  descriptionPlaceholder: string;
+  cancelButton: string;
+  createButton: string;
+  updateButton: string;
+}
+
 export interface IResponse {
   status: number;
   messages: {

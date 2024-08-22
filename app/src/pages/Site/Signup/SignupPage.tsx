@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { useAuth } from "@/hooks";
 import { Link } from "react-router-dom";
 import { UserClient } from "@/services";
-import { SubmitButton } from "@/components";
+import { GenericInput, SubmitButton } from "@/components";
 import { INITIAL_STATE_RESPONSE } from "@/constants";
 import type { IRegisterState } from "@/interfaces";
 
@@ -42,86 +42,46 @@ const SignupPage = () => {
           <form onSubmit={submitAction}>
             <fieldset disabled={isPending}>
               <div className="flex flex-col gap-4 text-base md:text-xl">
-                <div className="flex flex-col sm:flex-row gap-4 w-full">
-                  <div className="flex flex-col gap-2 w-full sm:w-1/2">
-                    <label htmlFor="name">Name</label>
-                    <input
-                      type="text"
-                      name="name"
+                <GenericPairDiv>
+                  <GenericDiv>
+                    <GenericInput
                       id="name"
+                      ariaLabel="Name"
+                      type="text"
                       placeholder="name"
-                      className={`border block w-full p-2.5 text-sm rounded-lg dark:bg-gray-700 ${
-                        badResponse.errors.name
-                          ? "bg-red-50 border-red-500 text-red-900 dark:text-red-400 placeholder-red-700 dark:placeholder-red-500 focus:ring-red-500 focus:border-red-500"
-                          : "bg-gray-50 border-gray-300 text-gray-900 dark:text-white dark:placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
-                      }`}
+                      error={badResponse.errors.name}
                     />
-                    {badResponse.errors.name && (
-                      <small className="text-red-600">
-                        {badResponse.errors.name}
-                      </small>
-                    )}
-                  </div>
-                  <div className="flex flex-col gap-2 w-full sm:w-1/2">
-                    <label htmlFor="email">Email</label>
-                    <input
-                      type="email"
-                      name="email"
+                  </GenericDiv>
+                  <GenericDiv>
+                    <GenericInput
                       id="email"
+                      ariaLabel="Email"
+                      type="email"
                       placeholder="email@test.com"
-                      className={`border block w-full p-2.5 text-sm rounded-lg dark:bg-gray-700 ${
-                        badResponse.errors.email
-                          ? "bg-red-50 border-red-500 text-red-900 dark:text-red-400 placeholder-red-700 dark:placeholder-red-500 focus:ring-red-500 focus:border-red-500"
-                          : "bg-gray-50 border-gray-300 text-gray-900 dark:text-white dark:placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
-                      }`}
+                      error={badResponse.errors.email}
                     />
-                    {badResponse.errors.email && (
-                      <small className="text-red-600">
-                        {badResponse.errors.email}
-                      </small>
-                    )}
-                  </div>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-4 w-full">
-                  <div className="flex flex-col gap-2 w-full sm:w-1/2">
-                    <label htmlFor="password">Password</label>
-                    <input
-                      type="password"
-                      name="password"
+                  </GenericDiv>
+                </GenericPairDiv>
+                <GenericPairDiv>
+                  <GenericDiv>
+                    <GenericInput
                       id="password"
-                      placeholder="password"
-                      className={`border block w-full p-2.5 text-sm rounded-lg dark:bg-gray-700 ${
-                        badResponse.errors.password
-                          ? "bg-red-50 border-red-500 text-red-900 dark:text-red-400 placeholder-red-700 dark:placeholder-red-500 focus:ring-red-500 focus:border-red-500"
-                          : "bg-gray-50 border-gray-300 text-gray-900 dark:text-white dark:placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
-                      }`}
-                    />
-                    {badResponse.errors.password && (
-                      <small className="text-red-600">
-                        {badResponse.errors.password}
-                      </small>
-                    )}
-                  </div>
-                  <div className="flex flex-col gap-2 w-full sm:w-1/2">
-                    <label htmlFor="confirmPassword">Confirm Password</label>
-                    <input
+                      ariaLabel="Password"
                       type="password"
-                      name="confirmPassword"
-                      id="confirmPassword"
-                      placeholder="confirm password"
-                      className={`border block w-full p-2.5 text-sm rounded-lg dark:bg-gray-700 ${
-                        badResponse.errors.confirmPassword
-                          ? "bg-red-50 border-red-500 text-red-900 dark:text-red-400 placeholder-red-700 dark:placeholder-red-500 focus:ring-red-500 focus:border-red-500"
-                          : "bg-gray-50 border-gray-300 text-gray-900 dark:text-white dark:placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
-                      }`}
+                      placeholder="password"
+                      error={badResponse.errors.password}
                     />
-                    {badResponse.errors.confirmPassword && (
-                      <small className="text-red-600">
-                        {badResponse.errors.confirmPassword}
-                      </small>
-                    )}
-                  </div>
-                </div>
+                  </GenericDiv>
+                  <GenericDiv>
+                    <GenericInput
+                      id="confirmPassword"
+                      ariaLabel="Confirm Password"
+                      type="password"
+                      placeholder="confirm password"
+                      error={badResponse.errors.confirmPassword}
+                    />
+                  </GenericDiv>
+                </GenericPairDiv>
               </div>
               <div className="text-center mt-4">
                 <SubmitButton title="Sign up" pending={isPending} />
@@ -143,3 +103,13 @@ const SignupPage = () => {
 };
 
 export default SignupPage;
+
+const GenericPairDiv = ({ children }: { children: ReactNode }) => {
+  return (
+    <div className="flex flex-col sm:flex-row gap-4 w-full">{children}</div>
+  );
+};
+
+const GenericDiv = ({ children }: { children: ReactNode }) => {
+  return <div className="flex flex-col gap-2 w-full sm:w-1/2">{children}</div>;
+};

@@ -1,18 +1,25 @@
 import clsx from "clsx";
 
-const Loading = ({
-  color = "blue",
-  size = "size-[1rem]",
-}: {
+interface ILoading {
   color?: string;
   size?: string;
-}) => {
+}
+
+const fillColorMap: { [key: string]: string } = {
+  red: "fill-red-500",
+  blue: "fill-blue-500",
+  green: "fill-green-500",
+};
+
+const Loading: React.FC<ILoading> = ({ color = "blue", size = "size-6" }) => {
   return (
     <div role="status" aria-hidden="true" className="px-4">
       <svg
         aria-hidden="true"
         className={clsx(
-          `${size} text-gray-200 animate-spin dark:text-gray-600 fill-${color}-600`
+          "text-gray-200 animate-spin dark:text-gray-600",
+          size,
+          fillColorMap[color]
         )}
         viewBox="0 0 100 101"
         fill="none"

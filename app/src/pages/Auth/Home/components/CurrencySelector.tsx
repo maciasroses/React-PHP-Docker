@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+import { SearchInput } from "@/components";
 import { useSearchParams } from "react-router-dom";
 
 const CurrencySelector = () => {
@@ -10,80 +12,56 @@ const CurrencySelector = () => {
   };
 
   return (
-    <div className="flex flex-wrap justify-end">
-      <div className="flex items-center me-4">
-        <input
-          aria-label="Currency USD"
+    <div className="flex flex-wrap justify-end gap-2">
+      <GenericDiv>
+        <SearchInput
           id="usd"
-          name="currency"
+          ariaLabel="USD"
           type="radio"
-          onChange={(e) => handleSelect("currency", e.target.id)}
-          defaultChecked={
+          value="usd"
+          checked={
             searchParams.get("currency") === "usd" ||
             !searchParams.get("currency")
           }
-          className="w-4 h-4"
+          onChange={(value) => handleSelect("currency", value)}
         />
-        <label
-          htmlFor="usd"
-          className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-        >
-          USD
-        </label>
-      </div>
-      <div className="flex items-center me-4">
-        <input
-          aria-label="Currency MXN"
+      </GenericDiv>
+      <GenericDiv>
+        <SearchInput
           id="mxn"
-          name="currency"
+          ariaLabel="MXN"
           type="radio"
-          onChange={(e) => handleSelect("currency", e.target.id)}
-          defaultChecked={searchParams.get("currency") === "mxn"}
-          className="w-4 h-4"
+          value="mxn"
+          checked={searchParams.get("currency") === "mxn"}
+          onChange={(value) => handleSelect("currency", value)}
         />
-        <label
-          htmlFor="mxn"
-          className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-        >
-          MXN
-        </label>
-      </div>
-      <div className="flex items-center me-4">
-        <input
-          aria-label="Currency EUR"
+      </GenericDiv>
+      <GenericDiv>
+        <SearchInput
           id="eur"
-          name="currency"
+          ariaLabel="EUR"
           type="radio"
-          onChange={(e) => handleSelect("currency", e.target.id)}
-          defaultChecked={searchParams.get("currency") === "eur"}
-          className="w-4 h-4"
+          value="eur"
+          checked={searchParams.get("currency") === "eur"}
+          onChange={(value) => handleSelect("currency", value)}
         />
-        <label
-          htmlFor="eur"
-          className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-        >
-          EUR
-        </label>
-      </div>
-      <div className="flex items-center me-4">
-        <input
-          aria-label="Currency GBP"
+      </GenericDiv>
+      <GenericDiv>
+        <SearchInput
           id="gbp"
-          name="currency"
+          ariaLabel="GBP"
           type="radio"
-          onChange={(e) => handleSelect("currency", e.target.id)}
-          defaultChecked={searchParams.get("currency") === "gbp"}
-          className="w-4 h-4"
+          value="gbp"
+          checked={searchParams.get("currency") === "gbp"}
+          onChange={(value) => handleSelect("currency", value)}
         />
-        <label
-          htmlFor="gbp"
-          className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-        >
-          GBP
-        </label>
-      </div>
+      </GenericDiv>
     </div>
   );
 };
 
 export default CurrencySelector;
+
+const GenericDiv = ({ children }: { children: ReactNode }) => {
+  return <div className="flex items-center">{children}</div>;
+};

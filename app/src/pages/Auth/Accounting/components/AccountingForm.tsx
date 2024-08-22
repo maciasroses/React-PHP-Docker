@@ -1,11 +1,19 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { Link } from "react-router-dom";
-import { SubmitButton } from "@/components";
+import { GenericInput, SubmitButton } from "@/components";
 import { AccountingClient } from "@/services";
 import { useCustomTranslation } from "@/hooks";
 import { INITIAL_STATE_RESPONSE } from "@/constants";
-import formatDateForDateInput from "@/utils/formatDateForInput";
-import type { IAccounting, IAccountingCreateNUpdateState } from "@/interfaces";
+import { formatDateForDateInput } from "@/utils";
+import type {
+  IAccounting,
+  IAccountingForm,
+  IAccountingCreateNUpdateState,
+} from "@/interfaces";
+
+interface IAccountingFormComponent {
+  accountingForm: IAccountingForm;
+}
 
 const AccountingForm = ({
   accounting,
@@ -14,7 +22,8 @@ const AccountingForm = ({
   accounting?: IAccounting;
   isEditing?: boolean;
 }) => {
-  const { accountingForm } = useCustomTranslation("accounting");
+  const { accountingForm }: IAccountingFormComponent =
+    useCustomTranslation("accounting");
   const [isPending, setIsPending] = useState(false);
   const [badResponse, setBadResponse] = useState<IAccountingCreateNUpdateState>(
     INITIAL_STATE_RESPONSE
@@ -50,128 +59,69 @@ const AccountingForm = ({
       <form onSubmit={submitAction}>
         <fieldset disabled={isPending}>
           <div className="flex flex-col gap-4 text-xl max-w-[500px]">
-            <div className="flex flex-col sm:flex-row gap-4 w-full">
-              <div className="flex flex-col gap-2 w-full sm:w-1/2">
-                <label htmlFor="amount">{accountingForm.amount}</label>
-                <input
+            <GenericPairDiv>
+              <GenericDiv>
+                <GenericInput
+                  id="amount"
+                  ariaLabel={accountingForm.amount}
                   type="number"
                   step="0.01"
-                  name="amount"
-                  id="amount"
                   placeholder="200"
-                  defaultValue={accounting?.amount ?? ""}
-                  className={`border block w-full p-2.5 text-sm rounded-lg dark:bg-gray-700 ${
-                    badResponse.errors.amount
-                      ? "bg-red-50 border-red-500 text-red-900 dark:text-red-400 placeholder-red-700 dark:placeholder-red-500 focus:ring-red-500 focus:border-red-500"
-                      : "bg-gray-50 border-gray-300 text-gray-900 dark:text-white dark:placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
-                  }`}
+                  defaultValue={accounting?.amount.toString() ?? ""}
+                  error={badResponse.errors.amount}
                 />
-                {badResponse.errors.amount && (
-                  <small className="text-red-600">
-                    {badResponse.errors.amount}
-                  </small>
-                )}
-              </div>
-              <div className="flex flex-col gap-2 w-full sm:w-1/2">
-                <label htmlFor="currency">{accountingForm.currency}</label>
-                <select
-                  name="currency"
+              </GenericDiv>
+              <GenericDiv>
+                <GenericInput
                   id="currency"
+                  ariaLabel={accountingForm.currency.title}
+                  type="select"
                   defaultValue={accounting?.currency ?? ""}
-                  className={`border block w-full p-2.5 text-sm rounded-lg dark:bg-gray-700 ${
-                    badResponse.errors.currency
-                      ? "bg-red-50 border-red-500 text-red-900 dark:text-red-400 placeholder-red-700 dark:placeholder-red-500 focus:ring-red-500 focus:border-red-500"
-                      : "bg-gray-50 border-gray-300 text-gray-900 dark:text-white dark:placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
-                  }`}
-                >
-                  <option value="">{accountingForm.selectCurrency}</option>
-                  <option value="USD">USD</option>
-                  <option value="MXN">MXN</option>
-                  <option value="EUR">EUR</option>
-                  <option value="GBP">GBP</option>
-                </select>
-                {badResponse.errors.currency && (
-                  <small className="text-red-600">
-                    {badResponse.errors.currency}
-                  </small>
-                )}
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 w-full">
-              <div className="flex flex-col gap-2 w-full sm:w-1/2">
-                <label htmlFor="date">{accountingForm.date}</label>
-                <input
-                  type="date"
-                  name="date"
+                  placeholder={accountingForm.currency.mainOption}
+                  options={Object.entries(accountingForm.currency.options).map(
+                    ([key, value]) => ({ value: key, label: value })
+                  )}
+                  error={badResponse.errors.currency}
+                />
+              </GenericDiv>
+            </GenericPairDiv>
+            <GenericPairDiv>
+              <GenericDiv>
+                <GenericInput
                   id="date"
-                  placeholder="Your date"
+                  ariaLabel={accountingForm.date}
+                  type="date"
                   defaultValue={
                     accounting?.date
                       ? formatDateForDateInput(accounting.date)
                       : ""
                   }
-                  className={`border block w-full p-2.5 text-sm rounded-lg dark:bg-gray-700 ${
-                    badResponse.errors.date
-                      ? "bg-red-50 border-red-500 text-red-900 dark:text-red-400 placeholder-red-700 dark:placeholder-red-500 focus:ring-red-500 focus:border-red-500"
-                      : "bg-gray-50 border-gray-300 text-gray-900 dark:text-white dark:placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
-                  }`}
+                  error={badResponse.errors.date?.toString()}
                 />
-                {badResponse.errors.date && (
-                  <small className="text-red-600">
-                    {badResponse.errors.date.toString()}
-                  </small>
-                )}
-              </div>
-              <div className="flex flex-col gap-2 w-full sm:w-1/2">
-                <label htmlFor="type">{accountingForm.type.title}</label>
-                <select
-                  name="type"
+              </GenericDiv>
+              <GenericDiv>
+                <GenericInput
                   id="type"
+                  ariaLabel={accountingForm.type.title}
+                  type="select"
                   defaultValue={accounting?.type ?? ""}
-                  className={`border block w-full p-2.5 text-sm rounded-lg dark:bg-gray-700 ${
-                    badResponse.errors.type
-                      ? "bg-red-50 border-red-500 text-red-900 dark:text-red-400 placeholder-red-700 dark:placeholder-red-500 focus:ring-red-500 focus:border-red-500"
-                      : "bg-gray-50 border-gray-300 text-gray-900 dark:text-white dark:placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
-                  }`}
-                >
-                  <option value="">{accountingForm.type.select}</option>
-                  <option value="Income">
-                    {accountingForm.type.options.income}
-                  </option>
-                  <option value="Expense">
-                    {accountingForm.type.options.expense}
-                  </option>
-                  <option value="Transfer">
-                    {accountingForm.type.options.transfer}
-                  </option>
-                </select>
-                {badResponse.errors.type && (
-                  <small className="text-red-600">
-                    {badResponse.errors.type}
-                  </small>
-                )}
-              </div>
-            </div>
-
+                  placeholder={accountingForm.type.mainOption}
+                  options={Object.entries(accountingForm.type.options).map(
+                    ([key, value]) => ({ value: key, label: value })
+                  )}
+                  error={badResponse.errors.type}
+                />
+              </GenericDiv>
+            </GenericPairDiv>
             <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="description">{accountingForm.description}</label>
-              <textarea
-                name="description"
+              <GenericInput
                 id="description"
+                ariaLabel={accountingForm.description}
+                type="textarea"
                 placeholder={accountingForm.descriptionPlaceholder}
                 defaultValue={accounting?.description ?? ""}
-                className={`border block w-full p-2.5 text-sm rounded-lg dark:bg-gray-700 ${
-                  badResponse.errors.description
-                    ? "bg-red-50 border-red-500 text-red-900 dark:text-red-400 placeholder-red-700 dark:placeholder-red-500 focus:ring-red-500 focus:border-red-500"
-                    : "bg-gray-50 border-gray-300 text-gray-900 dark:text-white dark:placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
-                }`}
+                error={badResponse.errors.description}
               />
-              {badResponse.errors.description && (
-                <small className="text-red-600">
-                  {badResponse.errors.description}
-                </small>
-              )}
             </div>
           </div>
           <input hidden name="accountingId" defaultValue={accounting?.id} />
@@ -202,3 +152,13 @@ const AccountingForm = ({
 };
 
 export default AccountingForm;
+
+const GenericPairDiv = ({ children }: { children: ReactNode }) => {
+  return (
+    <div className="flex flex-col sm:flex-row gap-4 w-full">{children}</div>
+  );
+};
+
+const GenericDiv = ({ children }: { children: ReactNode }) => {
+  return <div className="flex flex-col gap-2 w-full sm:w-1/2">{children}</div>;
+};

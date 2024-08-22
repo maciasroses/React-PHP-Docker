@@ -1,13 +1,13 @@
-import { SearchInput, SelectInput } from "@/components/Form";
-import { useSearchFilter } from "@/hooks";
-import type { IAdminUser } from "@/interfaces";
 import { ReactNode } from "react";
+import { useSearchFilter } from "@/hooks";
+import { SearchInput, SelectInput } from "@/components";
+import type { IAdminUser, ISearchbar } from "@/interfaces";
 
-interface ISearchbar {
+interface ISearchbarComponent extends ISearchbar {
   users: IAdminUser[];
 }
 
-const Searchbar = ({ users }: ISearchbar) => {
+const Searchbar = ({ users, searchbarProps }: ISearchbarComponent) => {
   const defaultFilters = {
     date_from: "",
     date_to: "",
@@ -23,13 +23,13 @@ const Searchbar = ({ users }: ISearchbar) => {
     useSearchFilter(defaultFilters);
 
   return (
-    <search className="w-full my-6">
-      <div className="flex flex-col xl:flex-row">
-        <div className="flex flex-col sm:flex-row items-center w-full xl:w-1/2">
+    <search className="w-full my-6 flex flex-col gap-2">
+      <GenericParentDiv>
+        <GenericDiv>
           <FlexComponent>
             <SearchInput
               id="date_from"
-              ariaLabel="Date from"
+              ariaLabel={searchbarProps.filters.date.from}
               type="date"
               value={filters.date_from}
               onChange={(value) => handleSearch("date_from", value)}
@@ -38,18 +38,18 @@ const Searchbar = ({ users }: ISearchbar) => {
           <FlexComponent>
             <SearchInput
               id="date_to"
-              ariaLabel="Date to"
+              ariaLabel={searchbarProps.filters.date.to}
               type="date"
               value={filters.date_to}
               onChange={(value) => handleSearch("date_to", value)}
             />
           </FlexComponent>
-        </div>
-        <div className="flex flex-col sm:flex-row items-center w-full xl:w-1/2">
+        </GenericDiv>
+        <GenericDiv>
           <FlexComponent>
             <SearchInput
               id="amount_from"
-              ariaLabel="Amount from"
+              ariaLabel={searchbarProps.filters.amount.from}
               type="number"
               step="0.01"
               value={filters.amount_from}
@@ -60,7 +60,7 @@ const Searchbar = ({ users }: ISearchbar) => {
           <FlexComponent>
             <SearchInput
               id="amount_to"
-              ariaLabel="Amount to"
+              ariaLabel={searchbarProps.filters.amount.to}
               type="number"
               step="0.01"
               value={filters.amount_to}
@@ -68,10 +68,10 @@ const Searchbar = ({ users }: ISearchbar) => {
               placeholder="900"
             />
           </FlexComponent>
-        </div>
-      </div>
-      <div className="flex flex-col xl:flex-row">
-        <div className="flex flex-col sm:flex-row w-full xl:w-1/2">
+        </GenericDiv>
+      </GenericParentDiv>
+      <GenericParentDiv>
+        <GenericDiv>
           <SelectInput
             ariaLabel="User"
             value={filters.user_id}
@@ -80,59 +80,61 @@ const Searchbar = ({ users }: ISearchbar) => {
               value: user.id,
               label: user.name,
             }))}
-            placeholder="Select a user"
+            placeholder={searchbarProps.filters.user}
           />
-
-          <select
-            aria-label="Currency"
+          <SelectInput
+            ariaLabel="Currency"
             value={filters.currency}
-            onChange={(e) => handleSearch("currency", e.target.value)}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          >
-            <option value="">Select a currency</option>
-            <option value="USD">USD</option>
-            <option value="EUR">EUR</option>
-            <option value="GBP">GBP</option>
-            <option value="MXN">MXN</option>
-          </select>
-
-          <select
-            aria-label="Type"
+            onChange={(value: string) => handleSearch("currency", value)}
+            options={Object.entries(
+              searchbarProps.filters.currencies.options
+            ).map(([key, value]) => ({ value: key, label: value }))}
+            placeholder={searchbarProps.filters.currencies.mainOption}
+          />
+          <SelectInput
+            ariaLabel="Type"
             value={filters.type}
-            onChange={(e) => handleSearch("type", e.target.value)}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          >
-            <option value="">Select a type</option>
-            <option value="Income">Income</option>
-            <option value="Expense">Expense</option>
-            <option value="Transfer">Transfer</option>
-          </select>
-        </div>
-        <div className="flex flex-col sm:flex-row w-full xl:w-1/2">
-          <input
-            aria-label="Search accounting"
-            placeholder="Search accounting"
+            onChange={(value: string) => handleSearch("type", value)}
+            options={Object.entries(searchbarProps.filters.types.options).map(
+              ([key, value]) => ({ value: key, label: value })
+            )}
+            placeholder={searchbarProps.filters.types.mainOption}
+          />
+        </GenericDiv>
+        <GenericDiv>
+          <SearchInput
+            ariaLabel="Search accountings"
             type="search"
             value={filters.q}
-            onChange={(e) => {
-              handleSearch("q", e.target.value);
-            }}
-            className="block p-2.5 w-full sm:w-2/3 z-20 text-sm text-gray-900 bg-gray-50 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+            onChange={(value: string) => handleSearch("q", value)}
+            placeholder={searchbarProps.search}
           />
           <button
             type="button"
             onClick={clearFilters}
             className="bg-red-500 text-white text-sm p-2.5 w-full sm:w-1/3 border border-red-300 focus:ring-red-500 focus:border-red-500 dark:bg-red-500 dark:border-red-500 dark:text-white dark:focus:border-red-500"
           >
-            Clear filters
+            {searchbarProps.clearFilters}
           </button>
-        </div>
-      </div>
+        </GenericDiv>
+      </GenericParentDiv>
     </search>
   );
 };
 
 export default Searchbar;
+
+const GenericParentDiv = ({ children }: { children: ReactNode }) => {
+  return <div className="flex flex-col xl:flex-row gap-2">{children}</div>;
+};
+
+const GenericDiv = ({ children }: { children: ReactNode }) => {
+  return (
+    <div className="flex flex-col sm:flex-row items-center w-full xl:w-1/2 gap-2">
+      {children}
+    </div>
+  );
+};
 
 const FlexComponent = ({ children }: { children: ReactNode }) => {
   return <div className="flex w-full items-center">{children}</div>;

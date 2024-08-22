@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useClientFetch } from "@/hooks";
+import { useClientFetch, useCustomTranslation } from "@/hooks";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import {
@@ -14,6 +14,7 @@ const AccountingPage = () => {
   const { t } = useTranslation();
   const lng = t("lang");
   const [searchParams] = useSearchParams();
+  const { searchbar } = useCustomTranslation("accounting");
 
   const fetchAccountings = useCallback(() => {
     return AdminAccountingClient.getAll(searchParams) as Promise<
@@ -32,7 +33,9 @@ const AccountingPage = () => {
 
   return (
     <>
-      {!loadingUsers && <Searchbar users={users as IAdminUser[]} />}
+      {!loadingUsers && (
+        <Searchbar users={users as IAdminUser[]} searchbarProps={searchbar} />
+      )}
       {loading ? (
         <AccountingDatatableSkeleton />
       ) : (

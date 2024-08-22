@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import Loading from "./Loading";
+import Loading from "../Loading";
 
 interface ISubmitbutton {
   title: string;
@@ -7,14 +7,24 @@ interface ISubmitbutton {
   color?: string;
 }
 
-const SubmitButton = ({ title, pending, color = "blue" }: ISubmitbutton) => {
+const colorMap: { [key: string]: string } = {
+  red: "bg-red-500",
+  blue: "bg-blue-500",
+  green: "bg-green-500",
+};
+
+const SubmitButton: React.FC<ISubmitbutton> = ({
+  title,
+  pending,
+  color = "blue",
+}) => {
   return (
     <button
       type="submit"
       disabled={pending}
       className={clsx(
         "px-4 py-2 text-white rounded-md w-auto",
-        pending ? `bg-${color}-500/50` : `bg-${color}-500`
+        pending ? `${colorMap[color]}/50` : colorMap[color]
       )}
     >
       {pending ? <Loading color={color} /> : title}

@@ -3,6 +3,7 @@
 namespace Admin\Models;
 
 use Core\BaseModel;
+use Exception;
 
 class Accounting extends BaseModel
 {
@@ -106,6 +107,22 @@ class Accounting extends BaseModel
         return $accounting[0];
     }
 
+    // MAYBE NOT NEEDED
+    // public function getAccountingByIdNUserId($id, $user_id)
+    // {
+    //     $fields = $this->fillable;
+    //     $fields[] = $this->primaryKey;
+
+    //     $accounting = $this->db
+    //         ->table($this->table)
+    //         ->select($fields)
+    //         ->where([$this->primaryKey, 'user_id'])
+    //         ->execute([$this->primaryKey => $id, 'user_id' => $user_id]);
+
+    //     if (!$accounting) return false;
+    //     return $accounting[0];
+    // }
+
     public function getAccountingByUserId($user_id)
     {
         $fields = $this->fillable;
@@ -118,6 +135,27 @@ class Accounting extends BaseModel
             ->execute(['user_id' => $user_id]);
 
         if (!$accounting) return false;
+        return $accounting;
+    }
+
+    public function createAccounting($data)
+    {
+        $accounting = $this->db
+            ->table($this->table)
+            ->insert(array_keys($data))
+            ->execute($data);
+
+        return $accounting;
+    }
+
+    public function updateAccounting($data)
+    {
+        $accounting = $this->db
+            ->table($this->table)
+            ->update(array_keys($data))
+            ->where([$this->primaryKey])
+            ->execute($data);
+
         return $accounting;
     }
 }

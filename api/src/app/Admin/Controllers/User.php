@@ -26,7 +26,23 @@ class User extends BaseController
     public function getMe()
     {
         $requestUser = $this->request->admin();
-        $user = $this->model->getMeById($requestUser['id']);
+        $user = $this->model->getUserById($requestUser['id']);
+
+        return $this->response(200, $user);
+    }
+
+    public function getUserById($id)
+    {
+        $user = $this->model->getUserById($id);
+
+        if (!$user) {
+            return $this->response(404, [], [
+                'error' => 'User not found',
+                'description' => 'The user with the id ' . $id . ' was not found',
+                'es_error' => 'Usuario no encontrado',
+                'es_description' => 'El usuario con el id ' . $id . ' no fue encontrado'
+            ]);
+        }
 
         return $this->response(200, $user);
     }

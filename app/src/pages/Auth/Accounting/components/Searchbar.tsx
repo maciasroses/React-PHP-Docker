@@ -1,34 +1,6 @@
-import { SearchInput, SelectInput } from "@/components/Form";
 import { useSearchFilter } from "@/hooks";
-
-interface ISearchbar {
-  searchbarProps: {
-    search: string;
-    filters: {
-      currencies: {
-        title: string;
-        description: string;
-        mainOption: string;
-        options: {
-          usd: string;
-          mxn: string;
-          eur: string;
-          gbp: string;
-        };
-      };
-      types: {
-        title: string;
-        description: string;
-        mainOption: string;
-        options: {
-          income: string;
-          expense: string;
-          transfer: string;
-        };
-      };
-    };
-  };
-}
+import { SearchInput, SelectInput } from "@/components/Form";
+import type { ISearchbar } from "@/interfaces";
 
 const Searchbar = ({ searchbarProps }: ISearchbar) => {
   const defaultFilters = {
@@ -52,7 +24,6 @@ const Searchbar = ({ searchbarProps }: ISearchbar) => {
           placeholder={searchbarProps.filters.currencies.mainOption}
           className="rounded-lg md:rounded-s-lg md:rounded-none"
         />
-
         <SelectInput
           ariaLabel="Type"
           value={filters.type}
@@ -63,9 +34,8 @@ const Searchbar = ({ searchbarProps }: ISearchbar) => {
           placeholder={searchbarProps.filters.types.mainOption}
           className="rounded-lg md:rounded-none"
         />
-
         <SearchInput
-          ariaLabel="Search events"
+          ariaLabel="Search accountings"
           type="search"
           value={filters.q}
           onChange={(value: string) => handleSearch("q", value)}

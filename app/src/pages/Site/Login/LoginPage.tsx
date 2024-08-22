@@ -1,8 +1,8 @@
-import { useState } from "react";
 import { useAuth } from "@/hooks";
 import { Link } from "react-router-dom";
 import { UserClient } from "@/services";
-import { SubmitButton } from "@/components";
+import { GenericInput, SubmitButton } from "@/components";
+import { ReactNode, useState } from "react";
 import { INITIAL_STATE_RESPONSE } from "@/constants";
 import type { ILoginState } from "@/interfaces";
 
@@ -42,44 +42,24 @@ const LoginPage = () => {
           <form onSubmit={submitAction}>
             <fieldset disabled={isPending}>
               <div className="flex flex-col gap-4 text-base md:text-xl">
-                <div className="flex flex-col gap-2 w-full">
-                  <label htmlFor="email">Email</label>
-                  <input
-                    type="email"
-                    name="email"
+                <GenericDiv>
+                  <GenericInput
                     id="email"
+                    ariaLabel="Email"
+                    type="email"
                     placeholder="email@test.com"
-                    className={`border block w-full p-2.5 text-sm rounded-lg dark:bg-gray-700 ${
-                      badResponse.errors.email
-                        ? "bg-red-50 border-red-500 text-red-900 dark:text-red-400 placeholder-red-700 dark:placeholder-red-500 focus:ring-red-500 focus:border-red-500"
-                        : "bg-gray-50 border-gray-300 text-gray-900 dark:text-white dark:placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
-                    }`}
+                    error={badResponse.errors.email}
                   />
-                  {badResponse.errors.email && (
-                    <small className="text-red-600">
-                      {badResponse.errors.email}
-                    </small>
-                  )}
-                </div>
-                <div className="flex flex-col gap-2 w-full">
-                  <label htmlFor="password">Password</label>
-                  <input
-                    type="password"
-                    name="password"
+                </GenericDiv>
+                <GenericDiv>
+                  <GenericInput
                     id="password"
+                    ariaLabel="Password"
+                    type="password"
                     placeholder="password"
-                    className={`border block w-full p-2.5 text-sm rounded-lg dark:bg-gray-700 ${
-                      badResponse.errors.password
-                        ? "bg-red-50 border-red-500 text-red-900 dark:text-red-400 placeholder-red-700 dark:placeholder-red-500 focus:ring-red-500 focus:border-red-500"
-                        : "bg-gray-50 border-gray-300 text-gray-900 dark:text-white dark:placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
-                    }`}
+                    error={badResponse.errors.password}
                   />
-                  {badResponse.errors.password && (
-                    <small className="text-red-600">
-                      {badResponse.errors.password}
-                    </small>
-                  )}
-                </div>
+                </GenericDiv>
               </div>
               <div className="text-center mt-4">
                 <SubmitButton title="Login" pending={isPending} />
@@ -101,3 +81,7 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+
+const GenericDiv = ({ children }: { children: ReactNode }) => {
+  return <div className="flex flex-col gap-2 w-full">{children}</div>;
+};

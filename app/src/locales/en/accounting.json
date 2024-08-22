@@ -4,15 +4,24 @@
   "searchbar": {
     "search": "Search...",
     "filters": {
+      "user": "Select a user",
+      "date": {
+        "from": "Date from:",
+        "to": "Date to:"
+      },
+      "amount": {
+        "from": "Amount from:",
+        "to": "Amount to:"
+      },
       "currencies": {
         "title": "Currencies",
         "description": "Filter by currency",
         "mainOption": "All currencies",
         "options": {
-          "usd": "USD",
-          "mxn": "MXN",
-          "eur": "EUR",
-          "gbp": "GBP"
+          "USD": "USD",
+          "MXN": "MXN",
+          "EUR": "EUR",
+          "GBP": "GBP"
         }
       },
       "types": {
@@ -20,12 +29,13 @@
         "description": "Filter by type",
         "mainOption": "All types",
         "options": {
-          "income": "Income",
-          "expense": "Expense",
-          "transfer": "Transfer"
+          "Income": "Income",
+          "Expense": "Expense",
+          "Transfer": "Transfer"
         }
       }
-    }
+    },
+    "clearFilters": "Clear filters"
   },
   "pagination": {
     "previous": "Previous",
@@ -39,16 +49,24 @@
     "createTitle": "Create accounting",
     "editTitle": "Edit accounting",
     "amount": "Amount",
-    "currency": "Currency",
-    "selectCurrency": "Select a currency",
     "date": "Date",
-    "type": {
-      "title": "Types",
-      "select": "Select a type",
+    "currency": {
+      "title": "Currency",
+      "mainOption": "All currencies",
       "options": {
-        "income": "Income",
-        "expense": "Expense",
-        "transfer": "Transfer"
+        "USD": "USD",
+        "MXN": "MXN",
+        "EUR": "EUR",
+        "GBP": "GBP"
+      }
+    },
+    "type": {
+      "title": "Type",
+      "mainOption": "All types",
+      "options": {
+        "Income": "Income",
+        "Expense": "Expense",
+        "Transfer": "Transfer"
       }
     },
     "description": "Description",

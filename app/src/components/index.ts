@@ -6,9 +6,9 @@ import { Header } from "./Header";
 import { Sidebar } from "./Sidebar";
 import Datatable from "./Datatable";
 import ProfileCard from "./ProfileCard";
-import SubmitButton from "./Submitbutton";
 import ErrorBoundary from "./ErrorBoundary";
 import AccountingCard from "./AccountingCard";
+import { SearchInput, SelectInput, GenericInput, SubmitButton } from "./Form";
 
 export {
   Modal,
@@ -19,6 +19,9 @@ export {
   Sidebar,
   Datatable,
   ProfileCard,
+  SearchInput,
+  SelectInput,
+  GenericInput,
   SubmitButton,
   ErrorBoundary,
   AccountingCard,

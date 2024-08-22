@@ -52,7 +52,7 @@ class User extends BaseModel
         return $result;
     }
 
-    public function getMeById($id)
+    public function getUserById($id)
     {
         $fields = $this->fillable;
         $fields[] = $this->primaryKey;

@@ -73,31 +73,30 @@ class Accounting extends BaseController
         // EXAMPLE OF A MASSIVE UPDATE:
         // [
         //     {
-        //          "id": "e97604b9-5e7c-11ef-86e9-0242ac120004",
-        //          "user_id": "e97604b9-5e7c-11ef-86e9-0242ac120004",
-        //          "description": "Test",
-        //          "amount": 100,
-        //          "type": "Income",
-        //          "currency": "USD",
-        //          "date": "2021-01-01"
+        //         "description": "Test updated and ya o no?",
+        //         "amount": "9.12",
+        //         "type": "Transfer",
+        //         "currency": "USD",
+        //         "date": "2021-01-01",
+        //         "id": "05d8bf1d-6008-11ef-90a5-0242ac120002",
+        //         "user_id": "c4d637ad-5fd4-11ef-8f75-0242ac120004"
         //     },
         //     {
-        //          "id": "e97604b9-5e7c-11ef-86e9-0242ac120004",
-        //          "user_id": "e97604b9-5e7c-11ef-86e9-0242ac120004",
-        //          "description": "Test",
-        //          "amount": 100,
-        //          "type": "Income",
-        //          "currency": "USD",
-        //          "date": "2021-01-01"
+        //         "description": "Nutella updated",
+        //         "amount": "8",
+        //         "type": "Transfer",
+        //         "currency": "GBP",
+        //         "date": "2024-08-20",
+        //         "id": "801b48cf-5fe6-11ef-8f75-0242ac120004",
+        //         "user_id": "e97604b9-5e7c-11ef-86e9-0242ac120004"
         //     }
         // ]
 
         $data = $this->request->body();
-        $copyModel = clone $this->model;
         $responses = [];
 
-        foreach ($data as $accounting) {
-            $id = isset($accounting['id']) ? $accounting['id'] : false;
+        foreach ($data as $index => $accounting) {
+            $accounting_id = isset($accounting['id']) ? $accounting['id'] : false;
             $user_id = isset($accounting['user_id']) ? $accounting['user_id'] : false;
             $date = isset($accounting['date']) ? $accounting['date'] : false;
             $description = isset($accounting['description']) ? $accounting['description'] : false;
@@ -105,28 +104,29 @@ class Accounting extends BaseController
             $type = isset($accounting['type']) ? $accounting['type'] : false;
             $currency = isset($accounting['currency']) ? $accounting['currency'] : false;
 
-            if (!$id || !$user_id || !$date || !$description || !$amount || !$type || !$currency) {
-                $responses[] = "Missing required fields in the accounting with the $description description.";
+            if (!$accounting_id || !$user_id || !$date || !$description || !$amount || !$type || !$currency) {
+                $responses[] = "Missing required fields at the object " . ($index + 1);
                 continue;
             }
 
             try {
                 $user = $this->userModel->getUserById($user_id);
                 if (!$user) {
-                    $responses[] = "User in the accounting with the $description description was not found.";
+                    $responses[] = "User not found at the object " . ($index + 1);
                     continue;
                 }
 
-                $accountingValidate = $copyModel->getAccountingById($id);
+                $accountingValidate = $this->model->getAccountingById($accounting_id);
+                $responses[] = $accountingValidate;
                 if (!$accountingValidate) {
-                    $responses[] = "Accounting with the $description description was not found.";
+                    $responses[] = "Accounting not found at the object " . ($index + 1);
                     continue;
                 }
 
                 $this->model->updateAccounting($accounting);
-                $responses[] = "Accounting with the $description description was updated.";
+                $responses[] = "Accounting updated at the object " . ($index + 1);
+                continue;
             } catch (Throwable $e) {
-                // return $this->response(400, [], ['message' => $e->getMessage()]);
                 $responses[] = $e->getMessage();
                 continue;
             }

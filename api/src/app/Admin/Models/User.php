@@ -46,7 +46,12 @@ class User extends BaseModel
         $accounting = new Accounting();
 
         foreach ($result as $key => $value) {
-            $result[$key]['accounting'] = $accounting->getAccountingByUserId($value['id']);
+            $accountings = $accounting->getAccountingByUserId($value['id']);
+            if ($accountings) {
+                $result[$key]['accounting'] = $accountings;
+            } else {
+                $result[$key]['accounting'] = [];
+            }
         }
 
         return $result;

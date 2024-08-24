@@ -110,22 +110,24 @@ class Accounting extends BaseController
             }
 
             try {
-                $user = $this->userModel->getUserById($user_id);
-                if (!$user) {
-                    $responses[] = "User not found at the object " . ($index + 1);
-                    continue;
-                }
 
-                $accountingValidate = $this->model->getAccountingById($accounting_id);
-                $responses[] = $accountingValidate;
-                if (!$accountingValidate) {
-                    $responses[] = "Accounting not found at the object " . ($index + 1);
-                    continue;
-                }
+                // VALIDATIONS NOT NEEDED FOR THIS FUNCTION, BUT IT SHOULD NEED TO BE UNCOMMENTED
+
+                // $user = $this->userModel->getUserById($user_id);
+                // if (!$user) {
+                //     $responses[] = "User not found at the object " . ($index + 1);
+                //     continue;
+                // }
+
+                // $accountingValidate = $this->model->getAccountingById($accounting_id);
+                // $responses[] = $accountingValidate;
+                // if (!$accountingValidate) {
+                //     $responses[] = "Accounting not found at the object " . ($index + 1);
+                //     continue;
+                // }
 
                 $this->model->updateAccounting($accounting);
                 $responses[] = "Accounting updated at the object " . ($index + 1);
-                continue;
             } catch (Throwable $e) {
                 $responses[] = $e->getMessage();
                 continue;

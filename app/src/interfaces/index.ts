@@ -15,16 +15,29 @@ export interface IUser {
   id: string;
 }
 
-export interface IAccounting {
+// export interface IAccounting {
+//   description: string;
+//   amount: number;
+//   type: string;
+//   currency: string;
+//   date: Date;
+//   id: string;
+//   created_at: Date;
+//   updated_at: Date;
+// }
+
+export interface IAccountingBase {
+  id: string;
   description: string;
   amount: number;
   type: string;
   currency: string;
   date: Date;
-  id: string;
   created_at: Date;
   updated_at: Date;
 }
+
+export type IAccounting = IAccountingBase;
 
 export interface IAdminUserForIAdminAccounting {
   user_id: string;
@@ -33,16 +46,7 @@ export interface IAdminUserForIAdminAccounting {
   user_role: string;
 }
 
-export interface IAdminAccouning extends IAdminUserForIAdminAccounting {
-  id: string;
-  description: string;
-  amount: number;
-  type: string;
-  currency: string;
-  date: Date;
-  created_at: Date;
-  updated_at: Date;
-}
+export type IAdminAccouning = IAccounting & IAdminUserForIAdminAccounting;
 
 export interface IAdminUser {
   id: string;

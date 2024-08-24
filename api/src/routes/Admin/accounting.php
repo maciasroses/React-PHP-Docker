@@ -13,6 +13,6 @@ $router->adminRespond('POST', '/accounting', function () use ($controller) {
     echo $controller->createAccounting();
 });
 
-$router->adminRespond('PUT', '/accounting_massive_update', function () use ($controller) {
+$router->adminRespond('PUT', '/accounting/massive_update', function () use ($controller) {
     echo $controller->updateMassiveAccounting();
 });

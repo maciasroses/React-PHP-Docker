@@ -23,7 +23,7 @@ const AccountingPage = () => {
   }, [searchParams]);
 
   const fetchUsers = useCallback(() => {
-    return AdminUserClient.getAll() as Promise<IAdminUser[]>;
+    return AdminUserClient.getAllJustForFilter() as Promise<IAdminUser[]>;
   }, []);
 
   const { data: accountings, loading } =

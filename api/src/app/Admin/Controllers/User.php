@@ -15,10 +15,17 @@ class User extends BaseController
         $this->model = new AdminUserModel();
     }
 
-    public function getAllUsers()
+    public function getAllAccountingJustForFilter()
+    {
+        $users = $this->model->getAllAccountingJustForFilter();
+
+        return $this->response(200, $users);
+    }
+
+    public function getAllUsersWithAccountings()
     {
         $queryParams = $this->request->parameters();
-        $users = $this->model->getAllUsers($queryParams);
+        $users = $this->model->getAllUsersWithAccountings($queryParams);
 
         return $this->response(200, $users);
     }

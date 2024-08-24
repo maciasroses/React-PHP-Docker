@@ -5,13 +5,14 @@ import type {
   ConditionalStyles,
   ExpanderComponentProps,
 } from "react-data-table-component";
-import { PencilIcon, TrashIcon } from "@/assets/icons";
+import { TrashIcon } from "@/assets/icons";
 import {
   formatAmount,
   formatDateAmerican,
   formatDateLatinAmerican,
   formatType,
 } from "@/utils";
+import EditButton from "./EditButton";
 
 const ExpandedComponent: React.FC<
   ExpanderComponentProps<IAdminAccouning> & { lng: string }
@@ -77,6 +78,9 @@ const AccountingDatatable = ({
   accountings: IAdminAccouning[];
   lng: string;
 }) => {
+  const [accountingsSelected, setAccountingsSelected] = useState<
+    IAdminAccouning[]
+  >([]);
   const [showMultiActions, setShowMultiActions] = useState(false);
   const handleSelectRows = ({
     selectedRows,
@@ -84,25 +88,27 @@ const AccountingDatatable = ({
     selectedRows: IAdminAccouning[];
   }) => {
     if (selectedRows.length === 0) {
+      setAccountingsSelected([]);
       setShowMultiActions(false);
       return;
     }
+    setAccountingsSelected(selectedRows);
     setShowMultiActions(true);
-    console.log(selectedRows);
   };
 
   const columns = [
     {
       name: lng === "en" ? "Actions" : "Acciones",
       width: "100px",
-      cell: (row: { id: string }) => (
+      cell: (row: IAdminAccouning) => (
         <div className="flex justify-center items-center gap-2">
-          <button
+          {/* <button
             onClick={() => alert(JSON.stringify(row))}
             className="rounded-md p-1 hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-blue-300 text-blue-700 bg-blue-100 dark:bg-blue-700 border border-blue-700 dark:border-blue-300"
           >
             <PencilIcon />
-          </button>
+          </button> */}
+          <EditButton accountings={[row]} />
           <button
             onClick={() => alert(JSON.stringify(row))}
             className="rounded-md p-1 hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-red-300 text-red-700 bg-red-100 dark:bg-red-700 border border-red-700 dark:border-red-300"
@@ -183,7 +189,7 @@ const AccountingDatatable = ({
         <>
           {showMultiActions && (
             <div className="flex justify-center items-center gap-2">
-              <button onClick={() => alert("Edit")}>Edit</button>
+              <EditButton accountings={accountingsSelected} />
               <button onClick={() => alert("Delete")}>Delete</button>
             </div>
           )}

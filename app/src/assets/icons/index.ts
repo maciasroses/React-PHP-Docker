@@ -1,3 +1,4 @@
+import XMark from "./XMark";
 import MXFlag from "./MXFlag";
 import USFlag from "./USFlag";
 import HomeIcon from "./Home";
@@ -10,6 +11,7 @@ import PencilIcon from "./Pencil";
 import AccountingIcon from "./Accounting";
 
 export {
+  XMark,
   MXFlag,
   USFlag,
   HomeIcon,

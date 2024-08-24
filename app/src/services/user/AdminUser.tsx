@@ -1,7 +1,7 @@
 class Http {
   #url = "http://localhost/api/admin";
 
-  async getAll() {
+  async getAllJustForFilter() {
     const url = `${this.#url}/users`;
 
     try {

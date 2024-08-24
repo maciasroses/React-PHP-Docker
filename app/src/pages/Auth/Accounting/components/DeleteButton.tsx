@@ -41,14 +41,12 @@ const DeleteButton = ({ accounting }: { accounting: IAccounting }) => {
         <p className="text-red-600">{badResponse.message}</p>
       )}
       <Modal isOpen={isOpen} onClose={onClose}>
-        <div className="h-2/3 overflow-auto">
-          <h1 className="text-base md:text-2xl font-semibold text-gray-900 dark:text-gray-100">
-            {deleteButton.alert}{" "}
-            <span className=" text-green-600">{accounting.description}</span>
-            {" ?"}
-          </h1>
-        </div>
-        <div className="flex justify-center items-center gap-2 mt-4 h-1/3">
+        <h1 className="text-base md:text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          {deleteButton.alert}{" "}
+          <span className=" text-green-600">{accounting.description}</span>
+          {" ?"}
+        </h1>
+        <div className="flex justify-center items-center gap-2 mt-4">
           <form onSubmit={submitAction}>
             <fieldset disabled={isPending}>
               <SubmitButton

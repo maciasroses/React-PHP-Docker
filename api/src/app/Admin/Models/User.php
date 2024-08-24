@@ -20,7 +20,20 @@ class User extends BaseModel
         'session_id'
     ];
 
-    public function getAllUsers($queryParams)
+    public function getAllAccountingJustForFilter()
+    {
+        $fields = $this->fillable;
+        $fields[] = $this->primaryKey;
+
+        $users = $this->db
+            ->table($this->table)
+            ->select($fields)
+            ->execute();
+
+        return $users;
+    }
+
+    public function getAllUsersWithAccountings($queryParams)
     {
         $fields = $this->fillable;
         $fields[] = $this->primaryKey;

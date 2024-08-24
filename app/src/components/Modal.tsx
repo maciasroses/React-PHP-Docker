@@ -1,3 +1,5 @@
+import { XMark } from "@/assets/icons";
+
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -8,13 +10,13 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed flex items-center justify-center bg-black bg-opacity-50 dark:bg-opacity-75 sm:ml-48 mt-20 inset-0">
-      <div className="relative bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg dark:shadow-gray-900 w-1/2 h-1/2 md:h-auto">
+    <div className="fixed flex items-center justify-center bg-black bg-opacity-50 dark:bg-opacity-75 sm:ml-48 mt-20 inset-0 z-10">
+      <div className="relative bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg dark:shadow-gray-900 w-1/2 h-auto max-h-[80%] overflow-y-auto overflow-x-hidden">
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
         >
-          x
+          <XMark />
         </button>
         {children}
       </div>

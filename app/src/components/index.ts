@@ -8,6 +8,7 @@ import Datatable from "./Datatable";
 import ProfileCard from "./ProfileCard";
 import ErrorBoundary from "./ErrorBoundary";
 import AccountingCard from "./AccountingCard";
+import AccountingForm from "./AccountingForm";
 import { SearchInput, SelectInput, GenericInput, SubmitButton } from "./Form";
 
 export {
@@ -19,6 +20,7 @@ export {
   Sidebar,
   Datatable,
   ProfileCard,
+  AccountingForm,
   SearchInput,
   SelectInput,
   GenericInput,

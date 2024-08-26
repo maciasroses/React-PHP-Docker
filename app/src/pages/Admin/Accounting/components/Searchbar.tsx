@@ -23,7 +23,7 @@ const Searchbar = ({ users, searchbarProps }: ISearchbarComponent) => {
     useSearchFilter(defaultFilters);
 
   return (
-    <search className="w-full my-6 flex flex-col gap-2">
+    <search className="w-full my-2 flex flex-col gap-2">
       <GenericParentDiv>
         <GenericDiv>
           <FlexComponent>

@@ -4,7 +4,6 @@ import { ErrorBoundary } from "@/components";
 const AccountingLayout = () => {
   return (
     <>
-      <div>Accounting Layout</div>
       <ErrorBoundary>
         <Outlet />
       </ErrorBoundary>

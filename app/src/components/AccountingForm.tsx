@@ -3,24 +3,41 @@ import {
   IAccountingCreateNUpdateState,
   IAccountingForm,
   IAdminAccouning,
+  IAdminUser,
 } from "@/interfaces";
 import { ReactNode } from "react";
 import { GenericInput } from "./Form";
 import { formatDateForDateInput } from "@/utils";
 
 interface IAccountingFormThisComponent {
-  accounting: IAccounting | IAdminAccouning;
+  accounting?: IAccounting | IAdminAccouning;
+  users: IAdminUser[];
   accountingForm: IAccountingForm;
   badResponse: IAccountingCreateNUpdateState;
 }
 
 const AccountingForm = ({
   accounting,
+  users,
   accountingForm,
   badResponse,
 }: IAccountingFormThisComponent) => {
   return (
     <div className="flex flex-col gap-4 text-xl max-w-[500px]">
+      <div className="flex flex-col gap-2 w-full">
+        <GenericInput
+          id="user_id"
+          ariaLabel="User"
+          type="select"
+          defaultValue={(accounting as IAdminAccouning)?.user_id ?? ""}
+          placeholder="Select a user"
+          options={users.map((user) => ({
+            value: user.id,
+            label: user.name,
+          }))}
+          error={badResponse.errors.user_id}
+        />
+      </div>
       <GenericPairDiv>
         <GenericDiv>
           <GenericInput
@@ -83,6 +100,7 @@ const AccountingForm = ({
           error={badResponse.errors.description}
         />
       </div>
+      <input hidden name="id" defaultValue={accounting?.id} />
     </div>
   );
 };

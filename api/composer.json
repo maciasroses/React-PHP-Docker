@@ -13,5 +13,8 @@
     "files": [
       "core/Helpers.php"
     ]
+  },
+  "require": {
+    "phpoffice/phpspreadsheet": "^1.25"
   }
 }

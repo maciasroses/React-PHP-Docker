@@ -19,7 +19,7 @@ const ThemeButton = ({
 }: IThemeButton) => {
   return (
     <button
-      className={`flex items-center p-2 rounded-lg dark:hover:bg-gray-700 group w-full hover:bg-gray-100 ${
+      className={`flex items-center gap-2 p-2 rounded-lg dark:hover:bg-gray-700 group w-full hover:bg-gray-100 ${
         theme === themeColor ? "text-blue-500" : "text-gray-900 dark:text-white"
       }`}
       onClick={handleThemeChange}
@@ -76,17 +76,15 @@ const ThemeSelector = () => {
   }, []);
 
   return (
-    <div className="relative inline-block" ref={menuRef}>
-      <div>
-        <button type="button" onClick={toggleMenu}>
-          {theme === "light" ||
-          (theme === "system" && systemTheme === "light") ? (
-            <LightIcon theme={theme} />
-          ) : (
-            <DarkIcon theme={theme} />
-          )}
-        </button>
-      </div>
+    <div className="relative inline-flex" ref={menuRef}>
+      <button type="button" onClick={toggleMenu}>
+        {theme === "light" ||
+        (theme === "system" && systemTheme === "light") ? (
+          <LightIcon theme={theme} />
+        ) : (
+          <DarkIcon theme={theme} />
+        )}
+      </button>
       {menuOpen && (
         <div
           className="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow list-none bg-red-white bg-gray-50 dark:bg-gray-700 ring-1 ring-black ring-opacity-5 focus:outline-none"

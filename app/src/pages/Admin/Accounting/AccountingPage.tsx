@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import {
   AccountingDatatable,
   AccountingDatatableSkeleton,
+  CreateButton,
   Searchbar,
 } from "./components";
 import { AdminAccountingClient, AdminUserClient } from "@/services";
@@ -33,6 +34,9 @@ const AccountingPage = () => {
 
   return (
     <>
+      <div className="w-full text-right">
+        <CreateButton users={users as IAdminUser[]} />
+      </div>
       {!loadingUsers && (
         <Searchbar users={users as IAdminUser[]} searchbarProps={searchbar} />
       )}
@@ -41,6 +45,7 @@ const AccountingPage = () => {
       ) : (
         <AccountingDatatable
           accountings={accountings as IAdminAccouning[]}
+          users={users as IAdminUser[]}
           lng={lng}
         />
       )}

@@ -186,6 +186,7 @@ export interface IAccountingCreateNUpdateState extends ISharedState {
     currency?: string;
     type?: string;
     date?: Date;
+    user_id?: string;
   };
 }
 

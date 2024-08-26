@@ -6,7 +6,7 @@ const LightIcon = ({ theme }: { theme: string }) => {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className={`size-6  mr-2 transition duration-75 ${
+      className={`size-6 transition duration-75 ${
         theme === "light"
           ? "text-blue-500"
           : "text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"

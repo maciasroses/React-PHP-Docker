@@ -1,4 +1,5 @@
 import { XMark } from "@/assets/icons";
+import { useCallback, useEffect, useRef } from "react";
 
 interface ModalProps {
   isOpen: boolean;
@@ -7,11 +8,36 @@ interface ModalProps {
 }
 
 const Modal = ({ isOpen, onClose, children }: ModalProps) => {
+  const menuRef = useRef(null);
+
+  const handleClickOutside = useCallback(
+    (event: MouseEvent) => {
+      if (
+        menuRef.current &&
+        !(menuRef.current as HTMLElement).contains(event.target as Node)
+      ) {
+        onClose();
+      }
+    },
+    [onClose]
+  );
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [handleClickOutside]);
+
   if (!isOpen) return null;
 
   return (
     <div className="fixed flex items-center justify-center bg-black bg-opacity-50 dark:bg-opacity-75 sm:ml-48 mt-20 inset-0 z-10">
-      <div className="relative bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg dark:shadow-gray-900 w-1/2 h-auto max-h-[80%] overflow-y-auto overflow-x-hidden">
+      <div
+        className="relative bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg dark:shadow-gray-900 w-[80%] md:w-1/2 h-auto max-h-[80%] overflow-y-auto overflow-x-hidden"
+        ref={menuRef}
+      >
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"

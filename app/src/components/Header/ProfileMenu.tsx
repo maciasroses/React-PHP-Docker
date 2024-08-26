@@ -57,20 +57,18 @@ const ProfileMenu = ({ user }: { user: IUser }) => {
   }, []);
 
   return (
-    <div className="relative inline-block text-left" ref={menuRef}>
-      <div>
-        <button
-          type="button"
-          className="inline-flex justify-center w-full rounded-full border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
-          onClick={toggleMenu}
-        >
-          <img
-            src="/assets/profilepic.webp"
-            alt="Profile"
-            className="h-10 w-10 rounded-full"
-          />
-        </button>
-      </div>
+    <div className="relative inline-flex text-left" ref={menuRef}>
+      <button
+        type="button"
+        className="inline-flex justify-center w-full rounded-full border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
+        onClick={toggleMenu}
+      >
+        <img
+          src="/assets/profilepic.webp"
+          alt="Profile"
+          className="h-10 w-10 rounded-full"
+        />
+      </button>
       {menuOpen && (
         <div
           className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow list-none bg-red-white bg-gray-50 dark:bg-gray-700 ring-1 ring-black ring-opacity-5 focus:outline-none"

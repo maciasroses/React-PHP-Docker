@@ -61,12 +61,10 @@ const LangSelector = () => {
   }, []);
 
   return (
-    <div className="relative inline-block" ref={menuRef}>
-      <div>
-        <button type="button" onClick={toggleMenu}>
-          {currentLang === "es" ? <MXFlag /> : <USFlag />}
-        </button>
-      </div>
+    <div className="relative inline-flex" ref={menuRef}>
+      <button type="button" onClick={toggleMenu}>
+        {currentLang === "es" ? <MXFlag /> : <USFlag />}
+      </button>
       {menuOpen && (
         <div
           className="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow list-none bg-red-white bg-gray-50 dark:bg-gray-700 ring-1 ring-black ring-opacity-5 focus:outline-none"

@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { AccountingCard, Card404, Datatable, ProfileCard } from "@/components";
-import type { IAdminAccouning } from "@/interfaces";
+import type { IAdminAccouning, IAdminUser } from "@/interfaces";
 import type {
   ConditionalStyles,
   ExpanderComponentProps,
 } from "react-data-table-component";
-import { TrashIcon } from "@/assets/icons";
 import {
   formatAmount,
   formatDateAmerican,
@@ -13,6 +12,7 @@ import {
   formatType,
 } from "@/utils";
 import EditButton from "./EditButton";
+import DeleteButton from "./DeleteButton";
 
 const ExpandedComponent: React.FC<
   ExpanderComponentProps<IAdminAccouning> & { lng: string }
@@ -73,9 +73,11 @@ const conditionalRowStyles = (
 
 const AccountingDatatable = ({
   accountings,
+  users,
   lng,
 }: {
   accountings: IAdminAccouning[];
+  users: IAdminUser[];
   lng: string;
 }) => {
   const [accountingsSelected, setAccountingsSelected] = useState<
@@ -102,19 +104,8 @@ const AccountingDatatable = ({
       width: "100px",
       cell: (row: IAdminAccouning) => (
         <div className="flex justify-center items-center gap-2">
-          {/* <button
-            onClick={() => alert(JSON.stringify(row))}
-            className="rounded-md p-1 hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-blue-300 text-blue-700 bg-blue-100 dark:bg-blue-700 border border-blue-700 dark:border-blue-300"
-          >
-            <PencilIcon />
-          </button> */}
-          <EditButton accountings={[row]} />
-          <button
-            onClick={() => alert(JSON.stringify(row))}
-            className="rounded-md p-1 hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-red-300 text-red-700 bg-red-100 dark:bg-red-700 border border-red-700 dark:border-red-300"
-          >
-            <TrashIcon />
-          </button>
+          <EditButton accountings={[row]} users={users} />
+          <DeleteButton accountings={[row]} />
         </div>
       ),
     },
@@ -188,9 +179,10 @@ const AccountingDatatable = ({
       {accountings.length > 0 ? (
         <>
           {showMultiActions && (
-            <div className="flex justify-center items-center gap-2">
-              <EditButton accountings={accountingsSelected} />
-              <button onClick={() => alert("Delete")}>Delete</button>
+            <div className="flex justify-end items-center gap-2 mb-2">
+              <h1>Massive Actions: </h1>
+              <EditButton accountings={accountingsSelected} users={users} />
+              <DeleteButton accountings={accountingsSelected} />
             </div>
           )}
           <Datatable

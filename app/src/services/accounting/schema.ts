@@ -1,6 +1,6 @@
 import z, { UnknownKeysParam, ZodRawShape } from "zod";
 
-const accountingCreateSchema = z.object({
+const baseSchema = {
   date: z.date({
     message: "Please enter a valid date",
   }),
@@ -16,29 +16,24 @@ const accountingCreateSchema = z.object({
   type: z.string(z.enum(["Income", "Expense", "Transfer"])).min(1, {
     message: "Please select a valid type",
   }),
+};
+
+const accountingCreateNUpdateSchema = z.object({
+  ...baseSchema,
 });
 
-const accountingUpdateSchema = z.object({
-  date: z.date({
-    message: "Please enter a valid date",
-  }),
-  description: z.string().min(2, {
-    message: "Please enter a valid description",
-  }),
-  amount: z.number().positive({
-    message: "Please enter a valid amount",
-  }),
-  currency: z.string(z.enum(["USD", "MXN", "EUR", "GBP"])).min(1, {
-    message: "Please select a valid currency",
-  }),
-  type: z.string(z.enum(["Income", "Expense", "Transfer"])).min(1, {
-    message: "Please select a valid type",
+const admingAccountingCreateNUpdateSchema = z.object({
+  ...baseSchema,
+  user_id: z.string().min(1, {
+    message: "Please select a valid user",
   }),
 });
 
 const schemas: { [key: string]: z.ZodObject<ZodRawShape, UnknownKeysParam> } = {
-  create: accountingCreateSchema,
-  update: accountingUpdateSchema,
+  create: accountingCreateNUpdateSchema,
+  adminCreate: admingAccountingCreateNUpdateSchema,
+  update: accountingCreateNUpdateSchema,
+  adminUpdate: admingAccountingCreateNUpdateSchema,
 };
 
 export function validateAccounting(action: string, data: unknown) {

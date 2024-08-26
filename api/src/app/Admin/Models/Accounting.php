@@ -141,4 +141,15 @@ class Accounting extends BaseModel
 
         return $accounting;
     }
+
+    public function deleteAccounting($id)
+    {
+        $accounting = $this->db
+            ->table($this->table)
+            ->delete()
+            ->where([$this->primaryKey])
+            ->execute([$this->primaryKey => $id]);
+
+        return $accounting;
+    }
 }
